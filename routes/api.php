@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\DemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,14 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
+// Login
 Route::post('login', [UsuarioController::class, 'login']);
 
+// Autorizar los controladores
 Route::group(['middleware' => ['jwt.verify']], function() {
-    Route::get('getmenus', [MenuController::class, 'getMenus']);
+    Route::get('/menu/getMenus', [MenuController::class, 'getMenus']);
 });
+
+// Route::get('/demo/getDemos', [DemoController::class, 'getDemos']);
+// Route::post('/demo/crearDemos', [DemoController::class, 'crearDemos']);
+// Route::post('/demo/actualizarDemos', [DemoController::class, 'actualizarDemos']);
