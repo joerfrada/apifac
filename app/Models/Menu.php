@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class Menu extends Model
 {
@@ -18,9 +19,13 @@ class Menu extends Model
         'menu_nombre,tipo,menu_padre_id,icono,tooltip,url,activo'
     ];
 
-    public function getMenus()
+    public function getMenus(Request $request)
     {
-        $menus = DB::select("exec pr_get_app_menu");
+        $menus = DB::select("exec pr_get_app_menu ?,?", 
+                            [
+                                $request->input('filtro'),
+                                $request->input('filtro') + 200
+                            ]);
 
         return $menus;
     }

@@ -18,7 +18,7 @@ class Usuario extends Authenticatable implements JWTSubject
     protected $primaryKey = 'usuario_id';
 
     protected $fillable = [
-        'usuario,activo'
+        'usuario,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function checkUsuario($usuario) {

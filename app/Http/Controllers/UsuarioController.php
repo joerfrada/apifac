@@ -23,7 +23,7 @@ class UsuarioController extends Controller
         $ldapport = 389;
 
         //user dn
-        $ldapusername = "uid=".$p_usuario.",ou=sinte,dc=linuxhacking,dc=local";
+        $ldapusername = "uid=".$p_usuario.",ou=users,dc=linuxhacking,dc=local";
         $ldappassword = $p_password;
 
         // connect to active directory
