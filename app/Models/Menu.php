@@ -19,15 +19,33 @@ class Menu extends Model
         'menu_nombre,tipo,menu_padre_id,icono,tooltip,url,activo'
     ];
 
+    public function crud_menus(Request $request, $evento) {
+        $db = DB::select("exec pr_crud_app_menu ?,?,?,?,?,?,?,?,?,?,?",
+                        [
+                            $evento,
+                            $request->input('menu_id'),
+                            $request->input('nombre_menu'),
+                            $request->input('tipo'),
+                            $request->input('menu_padre_id'),
+                            $request->input('icono'),
+                            $request->input('tooltip'),
+                            $request->input('url'),
+                            $request->input('activo') == true ? 'S' : 'N',
+                            $request->input('usuario_creador'),
+                            $request->input('usuario_modificador')
+                        ]);
+        return $db;
+    }
+
     public function getMenus(Request $request)
     {
-        $menus = DB::select("exec pr_get_app_menu ?,?", 
-                            [
-                                $request->input('filtro'),
-                                $request->input('filtro') + 200
-                            ]);
+        $db = DB::select("exec pr_get_app_menu ?,?", 
+                        [
+                            $request->input('filtro'),
+                            $request->input('filtro') + 200
+                        ]);
 
-        return $menus;
+        return $db;
     }
 
     public function getMenusById($menus) {

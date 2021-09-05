@@ -21,9 +21,9 @@ use App\Http\Controllers\DemoController;
 // Login
 Route::post('login', [UsuarioController::class, 'login']);
 
-// Autorizar los controladores
+// Autenticar los controladores
 Route::group(['middleware' => ['jwt.verify']], function() {
-    Route::get('/menu/getMenus', [MenuController::class, 'getMenus']);
+    Route::post('/menu/getMenus', [MenuController::class, 'getMenus']);
 });
 
 // Route::get('/demo/getDemos', [DemoController::class, 'getDemos']);

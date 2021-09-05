@@ -20,27 +20,27 @@ class Cargo extends Model
     ];
 
     public function crud_cargo(Request $request, $evento) {
-        $cargo = DB::select("exec pr_crud_app_cargos ?,?,?,?,?,?,?,?,?", 
-                            [
-                                $evento,
-                                $request->input('cargo_id'),
-                                $request->input('cargo'),
-                                $request->input('descripcion'),
-                                $request->input('categoria_id'),
-                                $request->input('clase_categoria_id'),
-                                $request->input('activo') == true ? 'S' : 'N',
-                                $request->input('usuario_creador'),
-                                $request->input('usuario_modificador')
-                            ]);
-        return $cargo;
+        $db = DB::select("exec pr_crud_app_cargos ?,?,?,?,?,?,?,?,?", 
+                        [
+                            $evento,
+                            $request->input('cargo_id'),
+                            $request->input('cargo'),
+                            $request->input('descripcion'),
+                            $request->input('categoria_id'),
+                            $request->input('clase_categoria_id'),
+                            $request->input('activo') == true ? 'S' : 'N',
+                            $request->input('usuario_creador'),
+                            $request->input('usuario_modificador')
+                        ]);
+        return $db;
     }
 
     public function get_cargos(Request $request) {
-        $cargo = DB::select("exec pr_get_apps_cargos ?,?",
-                            [
-                                $request->input('filtro'),
-                                $request->input('filtro') + 200
-                            ]);
-        return $cargo;
+        $db = DB::select("exec pr_get_apps_cargos ?,?",
+                        [
+                            $request->input('filtro'),
+                            $request->input('filtro') + 200
+                        ]);
+        return $db;
     }
 }

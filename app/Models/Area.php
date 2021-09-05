@@ -21,20 +21,20 @@ class Area extends Model
 
     // Crear/Actuallizar
     public function crud_areas(Request $request, $evento) {
-        $area = DB::select("exec pr_crud_app_areas ?,?,?,?,?,?", 
-                            [
-                                $evento,
-                                $request->input('area_id'),
-                                $request->input('cargo_grado_id'),
-                                $request->input('area'),
-                                $request->input('usuario_creador'),
-                                $request->input('usuario_modificador')
-                            ]);
-        return $area;
+        $db = DB::select("exec pr_crud_app_areas ?,?,?,?,?,?", 
+                        [
+                            $evento,
+                            $request->input('area_id'),
+                            $request->input('cargo_grado_id'),
+                            $request->input('area'),
+                            $request->input('usuario_creador'),
+                            $request->input('usuario_modificador')
+                        ]);
+        return $db;
     }
 
-    public function get_areas_by_id(Request $request) {
-        $area = DB::select("exec pr_get_app_areas_by_cargo_grado_id ?", [ $request->input('cargo_grado_id') ]);
-        return $area;
+    public function get_areas_by_cargo_grado_id(Request $request) {
+        $db = DB::select("exec pr_get_app_areas_by_cargo_grado_id ?", [ $request->input('cargo_grado_id') ]);
+        return $db;
     }
 }

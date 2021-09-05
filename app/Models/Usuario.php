@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Http\Request;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -20,6 +21,19 @@ class Usuario extends Authenticatable implements JWTSubject
     protected $fillable = [
         'usuario,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
+
+    public function crud_usuarios(Request $request, $evento) {
+        $db = DB::select("exec pr_crud_app_usuarios ?,?,?,?,?,?",
+                        [
+                            $evento,
+                            $request->input('usuario_id'),
+                            $request->input('usuario'),
+                            $request->input('activo') == true ? 'S' : 'N',
+                            $request->input('usuario_creador'),
+                            $request->input('usuario_modificador')
+                        ]);
+        return $db;
+    }
 
     public function checkUsuario($usuario) {
         $result = DB::select("exec pr_check_usuario ?", array($usuario));
