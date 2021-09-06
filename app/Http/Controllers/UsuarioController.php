@@ -54,7 +54,7 @@ class UsuarioController extends Controller
                     $tmp['avatar'] = $row->avatar;
                     $tmp['correo_electronico'] = $row->correo_electronico;
                     $tmp['tipo_perfil'] = $row->tipo_perfil;
-                    $tmp['menus'] = $m_menu->getMenusById($m_usuariomenu->getUsuarioMenu($row->usuario_id));
+                    $tmp['menus'] = $m_menu->get_menu_id($m_usuariomenu->getUsuarioMenu($row->usuario_id));
 
                     array_push($data, $tmp);
                 }
@@ -75,6 +75,44 @@ class UsuarioController extends Controller
         else 
         {
             return response()->json(array('tipo' => -1, 'mensaje' => 'No se puede conectar el servidor LDAP'));
+        }
+    }
+
+    public function crearUsuarios(Request $request) {
+        $model = new Usuario();
+
+        try {
+            $db = $model->crud_usuarios($request, 'C');
+
+            if ($db) {
+                $id = $db[0]->id;
+
+                $response = json_encode(array('mensaje' => 'Fue creado exitosamente.', 'tipo' => 0, 'id' => $id), JSON_NUMERIC_CHECK);
+                $response = json_decode($response);
+
+                return response()->json($response, 200);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(array('tipo' => -1, 'mensaje' => $e));
+        }
+    }
+
+    public function actualizarUsuarios(Request $request) {
+        $model = new Usuario();
+        
+        try {
+            $db = $model->crud_usuarios($request, 'U');
+
+            if ($db) {
+                $response = json_encode(array('mensaje' => 'Fue actualizado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);
+                $response = json_decode($response);
+
+                return response()->json($response, 200);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(array('tipo' => -1, 'mensaje' => $e));
         }
     }
 }

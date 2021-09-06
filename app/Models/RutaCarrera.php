@@ -26,7 +26,7 @@ class RutaCarrera extends Model
                             $request->input('ruta_carrera_id'),
                             $request->input('cuerpo_id'),
                             $request->input('especialidad_id'),
-                            $request->input('descripcion_id'),
+                            $request->input('descripcion'),
                             $request->input('tipo_categoria_id'),
                             $request->input('activo') == true ? 'S' : 'N',
                             $request->input('usuario_creador'),

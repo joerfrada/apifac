@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Menu;
+use App\Models\UsuarioMenu;
 
-class MenuController extends Controller
+class UsuarioMenuController extends Controller
 {
-    public function getMenus(Request $request)
-    {
+    public function getUsuarioMenu(Request $request) {
         $model = new Menu();
 
-        $datos = $model->get_menus($request);
+        $datos = $model->getUsuarioMenu($request);
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);
@@ -21,11 +20,11 @@ class MenuController extends Controller
         return response()->json($response, 200);
     }
 
-    public function crearMenus(Request $request) {
-        $model = new Menu();
+    public function crearUsuarioMenu(Request $request) {
+        $model = new UsuarioMenu();
 
         try {
-            $db = $model->crud_menus($request, 'C');
+            $db = $model->crud_usuarios_menu($request, 'C');
 
             if ($db) {
                 $id = $db[0]->id;
@@ -41,11 +40,11 @@ class MenuController extends Controller
         }
     }
 
-    public function actualizarMenus(Request $request) {
-        $model = new Menu();
-        
+    public function actualizarUsuarioMenu(Request $request) {
+        $model = new UsuarioMenu();
+
         try {
-            $db = $model->crud_menus($request, 'U');
+            $db = $model->crud_usuarios_menu($request, 'U');
 
             if ($db) {
                 $response = json_encode(array('mensaje' => 'Fue actualizado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);

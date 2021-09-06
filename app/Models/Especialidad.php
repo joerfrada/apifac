@@ -33,6 +33,11 @@ class Especialidad extends Model
         return $db;
     }
 
+    public function get_especialidades() {
+        $db = DB::select("exec pr_get_app_especialidades");
+        return $db;
+    }
+
     public function get_especialidades_by_cargo_grado_id(Request $request) {
         $db = DB::select("exec pr_get_app_especialidades_by_cargo_grado_id ?", [ $request->input('cargo_grado_id') ]);
         return $db;

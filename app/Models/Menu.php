@@ -37,7 +37,7 @@ class Menu extends Model
         return $db;
     }
 
-    public function getMenus(Request $request)
+    public function get_menus(Request $request)
     {
         $db = DB::select("exec pr_get_app_menu ?,?", 
                         [
@@ -48,7 +48,7 @@ class Menu extends Model
         return $db;
     }
 
-    public function getMenusById($menus) {
+    public function get_menus_id($menus) {
         $data = array();
         foreach($menus as $row) {
             $tmp = array();
