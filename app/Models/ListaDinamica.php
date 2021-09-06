@@ -35,7 +35,7 @@ class ListaDinamica extends Model
     }
 
     public function get_nombres_listas(Request $request) {
-        $db = DB::select("exec pr_get_apps_nombres_listas ?,?",
+        $db = DB::select("exec pr_get_app_nombres_listas ?,?",
                         [
                             $request->input('filtro'),
                             $request->input('filtro') + 200

@@ -37,8 +37,13 @@ class ListaDinamicaDetalle extends Model
         return $db;
     }
 
-    public function get_listas_dinamicas_nombre_lista_id(Request $request) {
+    public function get_listas_dinamicas_by_nombre_lista_id(Request $request) {
         $db = DB::select("exec pr_get_apps_nombres_listas ?", array($request->input('nombre_lista_id')));
+        return $db;
+    }
+
+    public function get_listas_dinamicas_full() {
+        $db = DB::select("exec pr_get_listas_dinamicas_full");
         return $db;
     }
 }
