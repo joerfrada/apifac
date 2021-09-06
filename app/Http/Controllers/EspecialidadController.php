@@ -9,10 +9,10 @@ use App\Models\Especialidad;
 
 class EspecialidadController extends Controller
 {
-    public function getEspecialidades() {
+    public function getEspecialidadesFull() {
         $model = new Especialidad();
 
-        $datos = $model->get_especialidades();
+        $datos = $model->get_especialidades_full();
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);

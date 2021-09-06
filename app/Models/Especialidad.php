@@ -33,8 +33,8 @@ class Especialidad extends Model
         return $db;
     }
 
-    public function get_especialidades() {
-        $db = DB::select("exec pr_get_app_especialidades");
+    public function get_especialidades_full() {
+        $db = DB::select("exec pr_get_app_especialidades_full");
         return $db;
     }
 

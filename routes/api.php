@@ -61,7 +61,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/cargo/actualizarEducaciones',[CargoController::class, 'actualizarEducaciones']);
 
     // Especialidades
-    Route::get('/especialidad/getEspecialidades', [EspecialidadController::class, 'getEspecialidades']);
+    Route::get('/especialidad/getEspecialidadesFull', [EspecialidadController::class, 'getEspecialidadesFull']);
 
     // Grados
     Route::post('/grado/getGrados', [GradoController::class, 'getCargos']);
