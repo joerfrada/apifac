@@ -12,7 +12,7 @@ class RutaCarreraController extends Controller
     public function getRutaCarrera(Request $request) {
         $model = new RutaCarrera();
 
-        $datos = $model->get($request);
+        $datos = $model->get_ruta_carrera($request);
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);

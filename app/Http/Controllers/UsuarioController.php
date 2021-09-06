@@ -78,6 +78,28 @@ class UsuarioController extends Controller
         }
     }
 
+    public function getUsuarios(Request $request) {
+        $model = new Usuario();
+
+        $datos = $model->get_usuarios($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function getUsuariosFull(Request $request) {
+        $model = new Usuario();
+
+        $datos = $model->get_usuarios_full($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
     public function crearUsuarios(Request $request) {
         $model = new Usuario();
 

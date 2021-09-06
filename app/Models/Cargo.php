@@ -36,7 +36,7 @@ class Cargo extends Model
     }
 
     public function get_cargos(Request $request) {
-        $db = DB::select("exec pr_get_apps_cargos ?,?",
+        $db = DB::select("exec pr_get_app_cargos ?,?",
                         [
                             $request->input('filtro'),
                             $request->input('filtro') + 200

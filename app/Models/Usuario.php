@@ -48,6 +48,20 @@ class Usuario extends Authenticatable implements JWTSubject
         return $result;
     }
 
+    public function get_usuarios(Request $request) {
+        $db = DB::select("exec pr_get_app_usuarios ?,?",
+                        [
+                            $request->input('filtro'),
+                            $request->input('filtro') + 200
+                        ]);
+        return $db;
+    }
+
+    public function get_usuarios_full() {
+        $db = DB::select("exec pr_get_app_usuarios_full");
+        return $db;
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

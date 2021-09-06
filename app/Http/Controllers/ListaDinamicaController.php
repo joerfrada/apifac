@@ -70,7 +70,7 @@ class ListaDinamicaController extends Controller
         return response()->json($response, 200);
     }
 
-    public function getListasDimamicasById(Request $request) {
+    public function getListasDimamicas(Request $request) {
         $model = new ListaDinamicaDetalle();
 
         $datos = $model->get_get_listas_dinamicas_by_nombre_lista_id($request);

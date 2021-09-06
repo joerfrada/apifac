@@ -20,7 +20,7 @@ class PerfilUsuarioController extends Controller
         return response()->json($response, 200);
     }
 
-    public function crearPerfiles(Request $request) {
+    public function crearPerfilesUsuarios(Request $request) {
         $model = new PerfilUsuario();
 
         try {

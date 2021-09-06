@@ -38,7 +38,7 @@ class Grado extends Model
     }
 
     public function get_grados(Request $request) {
-        $db = DB::select("exec pr_get_apps_grados ?,?",
+        $db = DB::select("exec pr_get_app_grados ?,?",
                         [
                             $request->input('filtro'),
                             $request->input('filtro') + 200
