@@ -9,10 +9,10 @@ use App\Models\Grado;
 
 class GradoController extends Controller
 {
-    public function getCargos(Request $request) {
+    public function getGrados(Request $request) {
         $model = new Grado();
 
-        $datos = $model->get_cargos($request);
+        $datos = $model->get_grados($request);
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);

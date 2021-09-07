@@ -67,9 +67,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/especialidad/getEspecialidadesFull', [EspecialidadController::class, 'getEspecialidadesFull']);
 
     // Grados
-    Route::post('/grado/getGrados', [GradoController::class, 'getCargos']);
-    Route::post('/grado/crearGrados', [GradoController::class, 'crearCargos']);
-    Route::post('/grado/actualizarGrados', [GradoController::class, 'actualizarCargos']);
+    Route::post('/grado/getGrados', [GradoController::class, 'getGrados']);
+    Route::post('/grado/crearGrados', [GradoController::class, 'crearGrados']);
+    Route::post('/grado/actualizarGrados', [GradoController::class, 'actualizarGrados']);
 
     // Listas Dinamicas
     Route::get('/listadinamica/getNombresListasFull',[ListaDinamicaController::class, 'getNombresListasFull']);
