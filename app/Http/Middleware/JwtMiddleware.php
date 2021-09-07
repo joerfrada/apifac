@@ -27,15 +27,15 @@ class JwtMiddleware extends BaseMiddleware
         {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException)
             {
-                return response()->json(['tipo' => -1, 'mensaje' => 'Token no es válido.']);
+                return response()->json(['tipo' => -1, 'codigo' => 1, 'mensaje' => 'Token no es válido.']);
             }
             else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException)
             {
-                return response()->json(['tipo' => -1, 'mensaje' => 'Token ha expirado']);
+                return response()->json(['tipo' => -1, 'codigo' => 2, 'mensaje' => 'Token ha expirado']);
             }
             else
             {
-                return response()->json(['tipo' => -1, 'mensaje' => 'No autorizado']);
+                return response()->json(['tipo' => -1, 'codigo' => 3, 'mensaje' => 'No autorizado']);
             }
         }
         return $next($request);
