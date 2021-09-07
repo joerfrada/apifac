@@ -48,7 +48,7 @@ class Menu extends Model
         return $db;
     }
 
-    public function get_menus_id($menus) {
+    public function get_menu_id($menus) {
         $data = array();
         foreach($menus as $row) {
             $tmp = array();

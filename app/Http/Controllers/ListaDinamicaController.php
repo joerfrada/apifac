@@ -21,6 +21,17 @@ class ListaDinamicaController extends Controller
         return response()->json($response, 200);
     }
 
+    public function getNombresListasFull() {
+        $model = new ListaDinamica();
+
+        $datos = $model->get_nombres_listas_full();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
     public function crearNombresListas(Request $request) {
         $model = new Grado();
 
@@ -62,7 +73,7 @@ class ListaDinamicaController extends Controller
     public function getListasDinamicasFull() {
         $model = new ListaDinamicaDetalle();
 
-        $datos = $model->get_get_listas_dinamicas_full();
+        $datos = $model->get_listas_dinamicas_full();
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);
@@ -73,7 +84,7 @@ class ListaDinamicaController extends Controller
     public function getListasDimamicas(Request $request) {
         $model = new ListaDinamicaDetalle();
 
-        $datos = $model->get_get_listas_dinamicas_by_nombre_lista_id($request);
+        $datos = $model->get_listas_dinamicas_by_nombre_lista_id($request);
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);

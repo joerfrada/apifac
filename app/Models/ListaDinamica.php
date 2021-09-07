@@ -42,4 +42,9 @@ class ListaDinamica extends Model
                         ]);
         return $db;
     }
+
+    public function get_nombres_listas_full() {
+        $db = DB::select("exec pr_get_app_nombres_listas_full");
+        return $db;
+    }
 }

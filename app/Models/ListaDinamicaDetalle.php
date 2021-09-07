@@ -43,7 +43,7 @@ class ListaDinamicaDetalle extends Model
     }
 
     public function get_listas_dinamicas_full() {
-        $db = DB::select("exec pr_get_listas_dinamicas_full");
+        $db = DB::select("exec pr_get_app_listas_dinamicas_full");
         return $db;
     }
 }
