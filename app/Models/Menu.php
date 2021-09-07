@@ -25,7 +25,7 @@ class Menu extends Model
                             $evento,
                             $request->input('menu_id'),
                             $request->input('nombre_menu'),
-                            $request->input('tipo'),
+                            $request->input('tipo_menu_id'),
                             $request->input('menu_padre_id'),
                             $request->input('icono'),
                             $request->input('tooltip'),
@@ -54,6 +54,7 @@ class Menu extends Model
             $tmp = array();
             $tmp['menu_id'] = $row->menu_id;
             $tmp['titulo'] = $row->nombre_menu;
+            $tmp['tipo_menu_id'] = $row->tipo_menu_id;
             $tmp['tipo'] = $row->tipo;
             $tmp['menu_padre_id'] = $row->menu_padre_id;
             $tmp['icono'] = $row->icono;
