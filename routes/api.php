@@ -49,6 +49,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/cargo/actualizarAreas',[CargoController::class, 'actualizarAreas']);
 
     // Cuerpos (Cargo)
+    Route::get('/cargo/getCuerposFull',[CargoController::class, 'getCuerposFull']);
     Route::post('/cargo/getCuerpos',[CargoController::class, 'getCuerpos']);
     Route::post('/cargo/crearCuerpos',[CargoController::class, 'crearCuerpos']);
     Route::post('/cargo/actualizarCuerpos',[CargoController::class, 'actualizarCuerpos']);

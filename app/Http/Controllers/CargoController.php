@@ -162,6 +162,18 @@ class CargoController extends Controller
         }
     }
 
+    public function getCuerposFull()
+    {
+        $model = new Cuerpo();
+
+        $datos = $model->get_cuerpos_full();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
     public function getCuerpos(Request $request)
     {
         $model = new Cuerpo();
