@@ -29,12 +29,16 @@ class Cuerpo extends Model
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')
                         ]);
-
         return $db;
     }
 
     public function get_cuerpos_by_cargo_grado_id(Request $request) {
         $db = DB::select("exec pr_get_app_cuerpos_by_cargo_grado_id ?", [ $request->input('cargo_grado_id') ]);
+        return $db;
+    }
+
+    public function get_cuerpos_full() {
+        $db = DB::select("exec pr_get_app_cuerpos_full");
         return $db;
     }
 }
