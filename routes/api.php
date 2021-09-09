@@ -10,6 +10,7 @@ use App\Http\Controllers\ListaDinamicaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PerfilUsuarioController;
+use App\Http\Controllers\RequerimientoController;
 use App\Http\Controllers\RutaCarreraController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UsuarioMenuController;
@@ -95,6 +96,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/perfilusuario/getPerfilesUsuarios', [PerfilUsuarioController::class, 'getPerfilesUsuarios']);
     Route::post('/perfilusuario/crearPerfilesUsuario', [PerfilUsuarioController::class, 'crearPerfilesUsuarios']);
     Route::post('/perfilusuario/actualizarPerfilesUsuarios', [PerfilUsuarioController::class, 'actualizarPerfilesUsuarios']);
+
+    // Requerimientos
+    Route::post('/requerimiento/getRequerimientos',[RequerimientoController::class, 'getRequerimientos']);
+    Route::post('/requerimiento/crearRequerimientos',[RequerimientoController::class, 'crearRequerimientos']);
+    Route::post('/requerimiento/actualizarRequerimientos',[RequerimientoController::class, 'actualizarRequerimientos']);
 
     // Ruta de Carrera
     Route::post('/rutacarrera/getRutaCarerra', [RutaCerraController::class, 'getRutaCarrera']);
