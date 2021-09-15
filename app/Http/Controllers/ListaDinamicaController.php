@@ -33,7 +33,7 @@ class ListaDinamicaController extends Controller
     }
 
     public function crearNombresListas(Request $request) {
-        $model = new Grado();
+        $model = new ListaDinamica();
 
         try {
             $db = $model->crud_nombres_listas($request, 'C');
@@ -53,7 +53,7 @@ class ListaDinamicaController extends Controller
     }
 
     public function actualizarNombresListas(Request $request) {
-        $model = new Grado();
+        $model = new ListaDinamica();
 
         try {
             $db = $model->crud_nombres_listas($request, 'U');
@@ -93,7 +93,7 @@ class ListaDinamicaController extends Controller
     }
 
     public function crearListasDinamicas(Request $request) {
-        $model = new ListaDinamica();
+        $model = new ListaDinamicaDetalle();
 
         try {
             $db = $model->crud_listas_dinamicas($request, 'C');
@@ -113,7 +113,7 @@ class ListaDinamicaController extends Controller
     }
 
     public function actualizarListasDinamicas(Request $request) {
-        $model = new ListaDinamica();
+        $model = new ListaDinamicaDetalle();
 
         try {
             $db = $model->crud_listas_dinamicas($request, 'U');
