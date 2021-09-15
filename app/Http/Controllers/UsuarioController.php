@@ -86,34 +86,39 @@ class UsuarioController extends Controller
 
             if (!$users->isEmpty()) {
                 $db = $users->first();
-            }
 
-            if (Hash::check($p_password, $db->password)) {
-                $usuario = $m_usuario->getLoginUsuario($p_usuario);
+                if (Hash::check($p_password, $db->password)) {
+                    $usuario = $m_usuario->getLoginUsuario($p_usuario);
 
-                $m_menu = new Menu();
-                $m_usuariomenu = new UsuarioMenu();
+                    $m_menu = new Menu();
+                    $m_usuariomenu = new UsuarioMenu();
 
-                $data = array();
-                foreach ($usuario as $row) {
-                    $tmp = array();
-                    $tmp['usuario_id'] = $row->usuario_id;
-                    $tmp['usuario'] = $row->usuario;
-                    $tmp['nombre_completo'] = $row->nombre_completo;
-                    $tmp['avatar'] = $row->avatar;
-                    $tmp['correo_electronico'] = $row->correo_electronico;
-                    $tmp['tipo_perfil'] = $row->tipo_perfil;
-                    $tmp['menus'] = $m_menu->get_menu_id($m_usuariomenu->getUsuarioMenu($row->usuario_id));
+                    $data = array();
+                    foreach ($usuario as $row) {
+                        $tmp = array();
+                        $tmp['usuario_id'] = $row->usuario_id;
+                        $tmp['usuario'] = $row->usuario;
+                        $tmp['nombre_completo'] = $row->nombre_completo;
+                        $tmp['avatar'] = $row->avatar;
+                        $tmp['correo_electronico'] = $row->correo_electronico;
+                        $tmp['tipo_perfil'] = $row->tipo_perfil;
+                        $tmp['menus'] = $m_menu->get_menu_id($m_usuariomenu->getUsuarioMenu($row->usuario_id));
 
-                    array_push($data, $tmp);
+                        array_push($data, $tmp);
+                    }
+
+                    $user = Usuario::first();
+                    $token = JWTAuth::fromUser($user);
+
+                    $response = json_encode(array('result' => $data), JSON_NUMERIC_CHECK);
+                    $response = json_decode($response);
+                    return response()->json(array('user' => $response, 'tipo' => 0, 'token' => $token));
                 }
-
-                $user = Usuario::first();
-                $token = JWTAuth::fromUser($user);
-
-                $response = json_encode(array('result' => $data), JSON_NUMERIC_CHECK);
-                $response = json_decode($response);
-                return response()->json(array('user' => $response, 'tipo' => 0, 'token' => $token));
+                else {
+                    $response = json_encode(array('result' => [], 'tipo' => -1, 'mensaje' => 'Usuario y/o Contraseña son incorrectos'), JSON_NUMERIC_CHECK);
+                    $response = json_decode($response);
+                    return response()->json($response);
+                }
             }
             else {
                 $response = json_encode(array('result' => [], 'tipo' => -1, 'mensaje' => 'Usuario y/o Contraseña son incorrectos'), JSON_NUMERIC_CHECK);
