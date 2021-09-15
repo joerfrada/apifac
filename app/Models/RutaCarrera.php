@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class RutaCarrera extends Model
@@ -16,7 +16,7 @@ class RutaCarrera extends Model
     protected $primaryKey = 'ruta_carrera_id';
 
     protected $fillable = [
-        'ruta_carrera_id,cuerpo_id,especialidad_id,descripcion,tipo_categoria_id,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'cuerpo_id,especialidad_id,descripcion,tipo_categoria_id,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_ruta_carrera(Request $request, $evento) {

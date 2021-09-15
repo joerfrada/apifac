@@ -103,7 +103,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/requerimiento/actualizarRequerimientos',[RequerimientoController::class, 'actualizarRequerimientos']);
 
     // Ruta de Carrera
-    Route::post('/rutacarrera/getRutaCarerra', [RutaCerraController::class, 'getRutaCarrera']);
+    Route::post('/rutacarrera/getRutaCarrera', [RutaCarreraController::class, 'getRutaCarrera']);
     Route::post('/rutacarrera/crearRutaCarrera', [RutaCarreraController::class, 'crearRutaCarrera']);
     Route::post('/rutacarrera/actualizarRutaCarrera', [RutaCarreraController::class, 'actualizarRutaCarrera']);
 
