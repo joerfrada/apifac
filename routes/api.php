@@ -31,8 +31,6 @@ Route::post('login', [UsuarioController::class, 'login']);
 
 // Listas Dinamicas
 Route::get('/listadinamica/getListasDinamicasFull',[ListaDinamicaController::class, 'getListasDinamicasFull']);
-// Route::post('/listadinamica/crearNombresListas',[ListaDinamicaController::class, 'crearNombresListas']);
-// Route::post('/listadinamica/actualizarNombresListas',[ListaDinamicaController::class, 'actualizarNombresListas']);
 
 // Autenticar los controladores
 Route::group(['middleware' => ['jwt.verify']], function() {
