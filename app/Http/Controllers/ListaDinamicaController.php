@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Log;
 
 use App\Models\ListaDinamica;
 use App\Models\ListaDinamicaDetalle;
@@ -33,6 +34,8 @@ class ListaDinamicaController extends Controller
     }
 
     public function crearNombresListas(Request $request) {
+        Log::info($request);
+
         $model = new ListaDinamica();
 
         try {
@@ -53,6 +56,8 @@ class ListaDinamicaController extends Controller
     }
 
     public function actualizarNombresListas(Request $request) {
+        Log::info($request);
+
         $model = new ListaDinamica();
 
         try {
@@ -93,6 +98,8 @@ class ListaDinamicaController extends Controller
     }
 
     public function crearListasDinamicas(Request $request) {
+        Log::info($request);
+
         $model = new ListaDinamicaDetalle();
 
         try {
@@ -113,6 +120,8 @@ class ListaDinamicaController extends Controller
     }
 
     public function actualizarListasDinamicas(Request $request) {
+        Log::info($request);
+        
         $model = new ListaDinamicaDetalle();
 
         try {

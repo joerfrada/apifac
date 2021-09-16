@@ -8,6 +8,7 @@ use JWTAuth;
 use JWTFactory;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Hash;
+use Log;
 
 use App\Models\Menu;
 use App\Models\Usuario;
@@ -151,6 +152,8 @@ class UsuarioController extends Controller
     }
 
     public function crearUsuarios(Request $request) {
+        Log::info($request);
+
         $model = new Usuario();
 
         try {
@@ -171,6 +174,8 @@ class UsuarioController extends Controller
     }
 
     public function actualizarUsuarios(Request $request) {
+        Log::info($request);
+        
         $model = new Usuario();
         
         try {
@@ -188,11 +193,24 @@ class UsuarioController extends Controller
         }
     }
 
-    public function updateLogin(Request $request) {
-        $model = new Usuario();
+    public function getAuthenticatedUser() {
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+        } 
+        catch (Exception $e) {
+            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+                return response()->json(['tipo' => -1, 'codigo' => 1, 'mensaje' => 'Token no es válido.'], $e->getStatusCode());
+            }
+            else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+                return response()->json(['tipo' => -1, 'codigo' => 2, 'mensaje' => 'La sesión ha expirado. Intente conectarse nuevamente.'], $e->getStatusCode());
+            }
+            else {
+                return response()->json(['tipo' => -1, 'codigo' => 3, 'mensaje' => 'No autorizado'], $e->getStatusCode());
+            }
+        }
 
-        $db = $model->updateLogin($request);
-
-        return response()->json(array('tipo' => 0, 'mensaje' => 'Password Actualizado.'));
+        return response()->json(compact('user'));
     }
 }

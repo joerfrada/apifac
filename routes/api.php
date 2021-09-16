@@ -74,13 +74,13 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/grado/actualizarGrados', [GradoController::class, 'actualizarGrados']);
 
     // Listas Dinamicas
-    Route::get('/listadinamica/getNombresListasFull',[ListaDinamicaController::class, 'getNombresListasFull']);
     Route::post('/listadinamica/getNombresListas',[ListaDinamicaController::class, 'getNombresListas']);
     Route::post('/listadinamica/crearNombresListas',[ListaDinamicaController::class, 'crearNombresListas']);
     Route::post('/listadinamica/actualizarNombresListas',[ListaDinamicaController::class, 'actualizarNombresListas']);
     Route::post('/listadinamica/getListasDinamicas',[ListaDinamicaController::class, 'getListasDinamicas']);
     Route::post('/listadinamica/crearListasDinamicas',[ListaDinamicaController::class, 'crearListasDinamicas']);
     Route::post('/listadinamica/actualizarListasDinamicas',[ListaDinamicaController::class, 'actualizarListasDinamicas']);
+    Route::get('/listadinamica/getNombresListasFull',[ListaDinamicaController::class, 'getNombresListasFull']);
 
     // Menu
     Route::post('/menu/getMenus', [MenuController::class, 'getMenus']);
