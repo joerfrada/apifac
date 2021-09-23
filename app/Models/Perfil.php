@@ -43,4 +43,9 @@ class Perfil extends Model
                         ]);
         return $db;
     }
+
+    public function get_perfiles_full() {
+        $db = DB::select("exec pr_get_app_perfiles_full");
+        return $db;
+    }
 }

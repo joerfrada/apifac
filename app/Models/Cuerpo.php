@@ -16,15 +16,16 @@ class Cuerpo extends Model
     protected $primaryKey = 'cuerpo_id';
 
     protected $fillable = [
-        'cargo_grado_id,cuerpo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'tipo_categoria_id,sigla,cuerpo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_cuerpos(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_cuerpos ?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_cuerpos ?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('cuerpo_id'),
-                            $request->input('cargo_grado_id'),
+                            $request->input('tipo_categoria_id'),
+                            $request->input('sigla'),
                             $request->input('cuerpo'),
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')
@@ -32,8 +33,12 @@ class Cuerpo extends Model
         return $db;
     }
 
-    public function get_cuerpos_by_cargo_grado_id(Request $request) {
-        $db = DB::select("exec pr_get_app_cuerpos_by_cargo_grado_id ?", [ $request->input('cargo_grado_id') ]);
+    public function get_cuerpos(Request $request) {
+        $db = DB::select("exec pr_get_app_cuerpos ?,?", 
+                        [
+                            $request->input('filtro'),
+                            $request->input('filtro') + 200
+                        ]);
         return $db;
     }
 

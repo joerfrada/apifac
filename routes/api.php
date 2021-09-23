@@ -3,7 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AplicacionController;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CargoController;
+use App\Http\Controllers\CuerpoController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\GradoController;
 use App\Http\Controllers\ListaDinamicaController;
@@ -34,39 +37,43 @@ Route::get('/listadinamica/getListasDinamicasFull',[ListaDinamicaController::cla
 
 // Autenticar los controladores
 Route::group(['middleware' => ['jwt.verify']], function() {
+    // Aplicaciones
+    Route::post('/aplicacion/getAplicaciones', [AplicacionController::class, 'getAplicaciones']);
+    Route::post('/aplicacion/crearAplicaciones', [AplicacionController::class, 'crearAplicaciones']);
+    Route::post('/aplicacion/actualizarAplicaciones', [AplicacionController::class, 'actualizarAplicaciones']);
+
     // Cargos
     Route::post('/cargo/getCargos', [CargoController::class, 'getCargos']);
     Route::post('/cargo/crearCargos', [CargoController::class, 'crearCargos']);
     Route::post('/cargo/actualizarCargos', [CargoController::class, 'actualizarCargos']);
+    Route::get('/cargo/getCargosFull', [CargoController::class, 'getCargosFull']);
 
     // Rutas y Requisitos (Cargo)
     Route::post('/cargo/getRutasRequisitos',[CargoController::class, 'getRutasRequisitos']);
     Route::post('/cargo/crearRutasRequisitos',[CargoController::class, 'crearRutasRequisitos']);
     Route::post('/cargo/actualizarRutasRequisitos',[CargoController::class, 'actualizarRutasRequisitos']);
 
-    // Areas (Cargo)
-    Route::post('/cargo/getAreas',[CargoController::class, 'getAreas']);
-    Route::post('/cargo/crearAreas',[CargoController::class, 'crearAreas']);
-    Route::post('/cargo/actualizarAreas',[CargoController::class, 'actualizarAreas']);
+    // Areas
+    Route::post('/area/getAreas',[AreaController::class, 'getAreas']);
+    Route::post('/area/crearAreas',[AreaController::class, 'crearAreas']);
+    Route::post('/area/actualizarAreas',[AreaController::class, 'actualizarAreas']);
 
-    // Cuerpos (Cargo)
-    Route::get('/cargo/getCuerposFull',[CargoController::class, 'getCuerposFull']);
-    Route::post('/cargo/getCuerpos',[CargoController::class, 'getCuerpos']);
-    Route::post('/cargo/crearCuerpos',[CargoController::class, 'crearCuerpos']);
-    Route::post('/cargo/actualizarCuerpos',[CargoController::class, 'actualizarCuerpos']);
+    // Cuerpos
+    Route::get('/cuerpo/getCuerposFull',[CuerpoController::class, 'getCuerposFull']);
+    Route::post('/cuerpo/getCuerpos',[CuerpoController::class, 'getCuerpos']);
+    Route::post('/cuerpo/crearCuerpos',[CuerpoController::class, 'crearCuerpos']);
+    Route::post('/cuerpo/actualizarCuerpos',[CuerpoController::class, 'actualizarCuerpos']);
 
-    // Especialidades (Cargo)
-    Route::post('/cargo/getEspecialidades',[CargoController::class, 'getEspecialidades']);
-    Route::post('/cargo/crearEspecialidades',[CargoController::class, 'crearEspecialidades']);
-    Route::post('/cargo/actualizarEspecialidades',[CargoController::class, 'actualizarEspecialidades']);
+    // Especialidades
+    Route::get('/especialidad/getEspecialidadesFull', [EspecialidadController::class, 'getEspecialidadesFull']);
+    Route::post('/especialidad/getEspecialidades',[EspecialidadController::class, 'getEspecialidades']);
+    Route::post('/especialidad/crearEspecialidades',[EspecialidadController::class, 'crearEspecialidades']);
+    Route::post('/especialidad/actualizarEspecialidades',[EspecialidadController::class, 'actualizarEspecialidades']);
 
     // Educaciones y Conocimientos (Cargo)
     Route::post('/cargo/getEducaciones',[CargoController::class, 'getEducaciones']);
     Route::post('/cargo/crearEducaciones',[CargoController::class, 'crearEducaciones']);
     Route::post('/cargo/actualizarEducaciones',[CargoController::class, 'actualizarEducaciones']);
-
-    // Especialidades
-    Route::get('/especialidad/getEspecialidadesFull', [EspecialidadController::class, 'getEspecialidadesFull']);
 
     // Grados
     Route::post('/grado/getGrados', [GradoController::class, 'getGrados']);
@@ -91,6 +98,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/perfil/getPerfiles', [PerfilController::class, 'getPerfiles']);
     Route::post('/perfil/crearPerfiles', [PerfilController::class, 'crearPerfiles']);
     Route::post('/perfil/actualizarPerfiles', [PerfilController::class, 'actualizarPerfiles']);
+    Route::get('/perfil/getPerfilesFull', [PerfilController::class, 'getPerfilesFull']);
 
     // Perfiles-Usuarios
     Route::post('/perfilusuario/getPerfilesUsuarios', [PerfilUsuarioController::class, 'getPerfilesUsuarios']);

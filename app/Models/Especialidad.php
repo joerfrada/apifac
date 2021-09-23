@@ -16,30 +16,34 @@ class Especialidad extends Model
     protected $primaryKey = 'especialidad_id';
 
     protected $fillable = [
-        'cargo_grado_id,especialidad,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'tipo_categoria_id,sigla,especialidad,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_especialidades(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_especialidades ?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_especialidades ?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('especialidad_id'),
-                            $request->input('cargo_grado_id'),
+                            $request->input('tipo_categoria_id'),
+                            $request->input('sigla'),
                             $request->input('especialidad'),
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')
                         ]);
+        return $db;
+    }
 
+    public function get_especialidades(Request $request) {
+        $db = DB::select("exec pr_get_app_especialidades ?,?", 
+                        [
+                            $request->input('filtro'),
+                            $request->input('filtro') + 200
+                        ]);
         return $db;
     }
 
     public function get_especialidades_full() {
         $db = DB::select("exec pr_get_app_especialidades_full");
-        return $db;
-    }
-
-    public function get_especialidades_by_cargo_grado_id(Request $request) {
-        $db = DB::select("exec pr_get_app_especialidades_by_cargo_grado_id ?", [ $request->input('cargo_grado_id') ]);
         return $db;
     }
 }

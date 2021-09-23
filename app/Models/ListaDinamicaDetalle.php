@@ -16,16 +16,14 @@ class ListaDinamicaDetalle extends Model
     protected $primaryKey = 'lista_dinamica_id';
 
     protected $fillable = [
-        'orden,nombre_lista_id,lista_dinamica,descripcion,lista_dinamica_padre_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'nombre_lista_id,lista_dinamica,descripcion,lista_dinamica_padre_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_nombres_listas(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_listas_dinamicas ?,?,?,?,?,?,?,?,?,?,?", 
+        $db = DB::select("exec pr_crud_app_listas_dinamicas ?,?,?,?,?,?,?,?,?", 
                         [
                             $evento,
                             $request->input('lista_dinamica_id'),
-                            $request->input('orden'),
-                            $request->input('codigo'),
                             $request->input('nombre_lista_padre_id'),
                             $request->input('lista_dinamica'),
                             $request->input('descripcion'),

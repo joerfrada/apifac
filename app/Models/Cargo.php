@@ -43,4 +43,9 @@ class Cargo extends Model
                         ]);
         return $db;
     }
+
+    public function get_cargos_full() {
+        $db = DB::select("exec pr_get_app_cargos_full");
+        return $db;
+    }
 }
