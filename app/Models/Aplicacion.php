@@ -21,7 +21,7 @@ class Aplicacion extends Model
 
     // Crear/Actuallizar
     public function crud_aplicaciones(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_aplicaciones ?,?,?,?,?,?,?,?,?,?", 
+        $db = DB::select("exec pr_crud_app_aplicaciones ?,?,?,?,?,?,?,?,?,?,?", 
                         [
                             $evento,
                             $request->input('aplicacion_id'),
