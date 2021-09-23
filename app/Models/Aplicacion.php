@@ -46,4 +46,9 @@ class Aplicacion extends Model
                         ]);
         return $db;
     }
+
+    public function get_aplicaciones_full() {
+        $db = DB::select("exec pr_get_aplicaciones_full");
+        return $db;
+    }
 }

@@ -38,6 +38,7 @@ Route::get('/listadinamica/getListasDinamicasFull',[ListaDinamicaController::cla
 // Autenticar los controladores
 Route::group(['middleware' => ['jwt.verify']], function() {
     // Aplicaciones
+    Route::get('/aplicacion/getAplicacionesFull', [AplicacionController::class, 'getAplicacionesFull']);
     Route::post('/aplicacion/getAplicaciones', [AplicacionController::class, 'getAplicaciones']);
     Route::post('/aplicacion/crearAplicaciones', [AplicacionController::class, 'crearAplicaciones']);
     Route::post('/aplicacion/actualizarAplicaciones', [AplicacionController::class, 'actualizarAplicaciones']);
