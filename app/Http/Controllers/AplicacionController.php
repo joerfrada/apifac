@@ -19,10 +19,10 @@ class AplicacionController extends Controller
         return response()->json($response, 200);
     }
 
-    public function getAplicacionesFull(Request $request) {
+    public function getAplicacionesFull() {
         $model = new Aplicacion();
 
-        $datos = $model->get_aplicaciones_full($request);
+        $datos = $model->get_aplicaciones_full();
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);
