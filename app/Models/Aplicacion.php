@@ -28,6 +28,7 @@ class Aplicacion extends Model
                             $request->input('nombre'),
                             $request->input('descripcion'),
                             $request->input('orden'),
+                            $request->input('url'),
                             $request->input('logo'),
                             $request->input('saml') == true ? 'S' : 'N',
                             $request->input('activo') == true ? 'S' : 'N',
