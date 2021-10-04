@@ -9,8 +9,18 @@ use App\Models\Area;
 
 class AreaController extends Controller
 {
-    public function getAreas(Request $request)
-    {
+    public function getAreasFull() {
+        $model = new Area();
+
+        $datos = $model->get_areas_full();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function getAreas(Request $request) {
         $model = new Area();
 
         $datos = $model->get_areas($request);

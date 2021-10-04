@@ -55,6 +55,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/cargo/actualizarRutasRequisitos',[CargoController::class, 'actualizarRutasRequisitos']);
 
     // Areas
+    Route::get('/area/getAreasFull',[AreaController::class, 'getAreasFull']);
     Route::post('/area/getAreas',[AreaController::class, 'getAreas']);
     Route::post('/area/crearAreas',[AreaController::class, 'crearAreas']);
     Route::post('/area/actualizarAreas',[AreaController::class, 'actualizarAreas']);

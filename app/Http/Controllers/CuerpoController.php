@@ -37,7 +37,7 @@ class CuerpoController extends Controller
         $model = new Cuerpo();
 
         try {
-            $db = $model->crud_areas($request, 'C');
+            $db = $model->crud_cuerpos($request, 'C');
 
             if ($db) {
                 $id = $db[0]->id;
@@ -57,7 +57,7 @@ class CuerpoController extends Controller
         $model = new Cuerpo();
         
         try {
-            $db = $model->crud_menus($request, 'U');
+            $db = $model->crud_cuerpos($request, 'U');
 
             if ($db) {
                 $response = json_encode(array('mensaje' => 'Fue actualizado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);
