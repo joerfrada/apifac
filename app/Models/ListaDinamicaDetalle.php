@@ -19,12 +19,12 @@ class ListaDinamicaDetalle extends Model
         'nombre_lista_id,lista_dinamica,descripcion,lista_dinamica_padre_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
-    public function crud_nombres_listas(Request $request, $evento) {
+    public function crud_listas_dinamicas(Request $request, $evento) {
         $db = DB::select("exec pr_crud_app_listas_dinamicas ?,?,?,?,?,?,?,?,?", 
                         [
                             $evento,
                             $request->input('lista_dinamica_id'),
-                            $request->input('nombre_lista_padre_id'),
+                            $request->input('nombre_lista_id'),
                             $request->input('lista_dinamica'),
                             $request->input('descripcion'),
                             $request->input('lista_dinamica_padre_id'),
@@ -36,7 +36,7 @@ class ListaDinamicaDetalle extends Model
     }
 
     public function get_listas_dinamicas_by_nombre_lista_id(Request $request) {
-        $db = DB::select("exec pr_get_app_nombres_listas ?", array($request->input('nombre_lista_id')));
+        $db = DB::select("exec pr_get_app_listas_dinamicas_by_nombre_lista_id ?", array($request->input('nombre_lista_id')));
         return $db;
     }
 
