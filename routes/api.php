@@ -78,6 +78,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/cargo/actualizarEducaciones',[CargoController::class, 'actualizarEducaciones']);
 
     // Grados
+    Route::get('/grado/getGradosFull', [GradoController::class, 'getGradosFull']);
     Route::post('/grado/getGrados', [GradoController::class, 'getGrados']);
     Route::post('/grado/crearGrados', [GradoController::class, 'crearGrados']);
     Route::post('/grado/actualizarGrados', [GradoController::class, 'actualizarGrados']);
@@ -116,6 +117,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/rutacarrera/getRutaCarrera', [RutaCarreraController::class, 'getRutaCarrera']);
     Route::post('/rutacarrera/crearRutaCarrera', [RutaCarreraController::class, 'crearRutaCarrera']);
     Route::post('/rutacarrera/actualizarRutaCarrera', [RutaCarreraController::class, 'actualizarRutaCarrera']);
+    Route::post('/rutacarrera/crearLineasCargos', [RutaCarreraController::class, 'crearLineasCargos']);
+    Route::post('/rutacarrera/actualizarLineasCargos', [RutaCarreraController::class, 'actualizarLineasCargos']);
+    Route::post('/rutacarrera/getLineasCargos', [RutaCarreraController::class, 'getLineasCargos']);
 
     // Usuarios
     Route::get('/usuario/getUsuariosFull', [UsuarioController::class, 'getUsuariosFull']);

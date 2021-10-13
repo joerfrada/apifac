@@ -91,7 +91,7 @@ class RutaCarreraController extends Controller
     }
 
     public function actualizarLineasCargos(Request $request) {
-        $model = new RutaCarrera();
+        $model = new LineaCargo();
 
         try {
             $db = $model->crud_lineas_cargos($request, 'U');

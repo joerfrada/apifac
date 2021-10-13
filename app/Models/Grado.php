@@ -45,4 +45,9 @@ class Grado extends Model
                         ]);
         return $db;
     }
+
+    public function get_grados_full() {
+        $db = DB::select("exec pr_get_app_grados_full");
+        return $db;
+    }
 }

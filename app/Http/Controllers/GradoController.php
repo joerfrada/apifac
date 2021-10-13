@@ -9,6 +9,17 @@ use App\Models\Grado;
 
 class GradoController extends Controller
 {
+    public function getGradosFull() {
+        $model = new Grado();
+
+        $datos = $model->get_grados_full();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+    
     public function getGrados(Request $request) {
         $model = new Grado();
 
