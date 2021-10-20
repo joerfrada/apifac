@@ -43,4 +43,13 @@ class RutaCarrera extends Model
                         ]);
         return $db;
     }
+
+    public function get_ruta_carrera_by_cargo(Request $request) {
+        $db = DB::select("exec pr_get_ruta_carrera_by_cargo ?,?",
+                        [
+                            $request->input('filtro'),
+                            $request->input('filtro') + 200
+                        ]);
+        return $db;
+    }
 }

@@ -107,4 +107,15 @@ class RutaCarreraController extends Controller
             return response()->json(array('tipo' => -1, 'mensaje' => $e));
         }
     }
+
+    public function getRutaCarrerabyCargos(Request $request) {
+        $model = new RutaCarrera();
+
+        $datos = $model->get_ruta_carrera_by_cargos($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
 }
