@@ -25,12 +25,11 @@ class UsuarioController extends Controller
         $m_usuario = new Usuario();
 
         if (!$developer) {
-            // Active Directory server (Windows Server) or OpenLDAP (Linux)
-            $ldaphost = "ldap.linuxhacking.local";
+            $ldaphost = "ldap.localdomain.com";
             $ldapport = 389;
 
             //user dn
-            $ldapusername = "uid=".$p_usuario.",ou=users,dc=linuxhacking,dc=local";
+            $ldapusername = "uid=".$p_usuario.",ou=users,dc=localdomain,dc=com";
             $ldappassword = $p_password;
 
             // connect to active directory

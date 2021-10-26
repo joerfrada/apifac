@@ -10,7 +10,7 @@ use App\Models\UsuarioMenu;
 class UsuarioMenuController extends Controller
 {
     public function getUsuarioMenu(Request $request) {
-        $model = new Menu();
+        $model = new UsuarioMenu();
 
         $datos = $model->getUsuarioMenu($request);
 

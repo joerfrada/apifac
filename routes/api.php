@@ -128,6 +128,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/usuario/actualizarUsuarios', [UsuarioController::class, 'actualizarUsuarios']);
 
     // Usuarios-Menu
-    Route::post('/usuariomenu/crearUsuarioMenu', [UsuarioController::class, 'crearUsuarioMenu']);
-    Route::post('/usuariomenu/actualizarUsuarioMenu', [UsuarioController::class, 'actualizarUsuarioMenu']);
+    Route::post('/usuariomenu/crearUsuarioMenu', [UsuarioMenuController::class, 'crearUsuarioMenu']);
+    Route::post('/usuariomenu/actualizarUsuarioMenu', [UsuarioMenuController::class, 'actualizarUsuarioMenu']);
 });
