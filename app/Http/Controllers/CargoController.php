@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Log;
 
 use App\Models\Cargo;
+use App\Models\CargoConfiguracion;
+use App\Models\CargoGrado;
 use App\Models\Area;
 use App\Models\Cuerpo;
 use App\Models\Educacion;
 use App\Models\Especialidad;
-use App\Models\RutaRequisito;
 
 class CargoController extends Controller
 {
@@ -25,8 +27,7 @@ class CargoController extends Controller
         return response()->json($response, 200);
     }
 
-    public function getCargosFull()
-    {
+    public function getCargosFull() {
         $model = new Cargo();
 
         $datos = $model->get_cargos_full();
@@ -41,7 +42,7 @@ class CargoController extends Controller
         $model = new Cargo();
 
         try {
-            $db = $model->crud_cargos($request, 'C');
+            $db = $model->crud_cargo($request, 'C');
 
             if ($db) {
                 $id = $db[0]->id;
@@ -61,7 +62,7 @@ class CargoController extends Controller
         $model = new Cargo();
         
         try {
-            $db = $model->crud_cargos($request, 'U');
+            $db = $model->crud_cargo($request, 'U');
 
             if ($db) {
                 $response = json_encode(array('mensaje' => 'Fue actualizado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);
@@ -75,10 +76,10 @@ class CargoController extends Controller
         }
     }
 
-    public function getRutasRequisitos(Request $request) {
-        $model = new RutaRequisito();
+    public function getCargosGradosByCargoId(Request $request) {
+        $model = new CargoGrado();
 
-        $datos = $model->get_rutas_requisitos_by_cargo_grado_id($request);
+        $datos = $model->get_cargos_grados_by_cargo_id($request);
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);
@@ -86,11 +87,11 @@ class CargoController extends Controller
         return response()->json($response, 200);
     }
 
-    public function crearRutasRequistos(Request $request) {
-        $model = new RutaRequisito();
+    public function crearCargosGrados(Request $request) {
+        $model = new CargoGrado();
 
         try {
-            $db = $model->crud_rutas_requisitos($request, 'C');
+            $db = $model->crud_cargos_grados($request, 'C');
 
             if ($db) {
                 $id = $db[0]->id;
@@ -106,11 +107,11 @@ class CargoController extends Controller
         }
     }
 
-    public function actualizarRutasRequistos(Request $request) {
-        $model = new RutaRequisito();
-        
+    public function actualizarCargosGrados(Request $request) {
+        $model = new CargoGrado();
+
         try {
-            $db = $model->crud_rutas_requisitos($request, 'U');
+            $db = $model->crud_cargos_grados($request, 'U');
 
             if ($db) {
                 $response = json_encode(array('mensaje' => 'Fue actualizado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);
@@ -124,10 +125,10 @@ class CargoController extends Controller
         }
     }
 
-    public function getEducaciones(Request $request) {
-        $model = new Educacion();
+    public function getCargosConfiguracionByCargoGradoId(Request $request) {
+        $model = new CargoConfiguracion();
 
-        $datos = $model->get_educacion_conocimientos_by_cargo_grado_id($request);
+        $datos = $model->get_cargos_configuracion_by_cargo_grado_id($request);
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);
@@ -135,11 +136,11 @@ class CargoController extends Controller
         return response()->json($response, 200);
     }
 
-    public function crearEducaciones(Request $request) {
-        $model = new Especialidad();
+    public function crearCargosConfiguracion(Request $request) {
+        $model = new CargoConfiguracion();
 
         try {
-            $db = $model->crud_educacion_conocimientos($request, 'C');
+            $db = $model->crud_cargos_configuracion($request, 'C');
 
             if ($db) {
                 $id = $db[0]->id;
@@ -155,11 +156,11 @@ class CargoController extends Controller
         }
     }
 
-    public function actualizarEducaciones(Request $request) {
-        $model = new Area();
-        
+    public function actualizarCargosConfiguracion(Request $request) {
+        $model = new CargoConfiguracion();
+
         try {
-            $db = $model->crud_educacion_conocimientos($request, 'U');
+            $db = $model->crud_cargos_configuracion($request, 'U');
 
             if ($db) {
                 $response = json_encode(array('mensaje' => 'Fue actualizado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);

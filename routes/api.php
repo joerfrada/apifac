@@ -49,10 +49,15 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/cargo/actualizarCargos', [CargoController::class, 'actualizarCargos']);
     Route::get('/cargo/getCargosFull', [CargoController::class, 'getCargosFull']);
 
-    // Rutas y Requisitos (Cargo)
-    Route::post('/cargo/getRutasRequisitos',[CargoController::class, 'getRutasRequisitos']);
-    Route::post('/cargo/crearRutasRequisitos',[CargoController::class, 'crearRutasRequisitos']);
-    Route::post('/cargo/actualizarRutasRequisitos',[CargoController::class, 'actualizarRutasRequisitos']);
+    // Cargos Grado
+    Route::post('/cargo/getCargosGradosByCargoId', [CargoController::class, 'getCargosGradosByCargoId']);
+    Route::post('/cargo/crearCargosGrados', [CargoController::class, 'crearCargosGrados']);
+    Route::post('/cargo/actualizarCargosGrados', [CargoController::class, 'actualizarCargosGrados']);
+
+    // Cargos Configuracion
+    Route::post('/cargo/getCargosConfiguracionByCargoGradoId', [CargoController::class, 'getCargosConfiguracionByCargoGradoId']);
+    Route::post('/cargo/crearCargosConfiguracion', [CargoController::class, 'crearCargosConfiguracion']);
+    Route::post('/cargo/actualizarCargosConfiguracion', [CargoController::class, 'actualizarCargosConfiguracion']);
 
     // Areas
     Route::get('/area/getAreasFull',[AreaController::class, 'getAreasFull']);
@@ -71,11 +76,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/especialidad/getEspecialidades',[EspecialidadController::class, 'getEspecialidades']);
     Route::post('/especialidad/crearEspecialidades',[EspecialidadController::class, 'crearEspecialidades']);
     Route::post('/especialidad/actualizarEspecialidades',[EspecialidadController::class, 'actualizarEspecialidades']);
-
-    // Educaciones y Conocimientos (Cargo)
-    Route::post('/cargo/getEducaciones',[CargoController::class, 'getEducaciones']);
-    Route::post('/cargo/crearEducaciones',[CargoController::class, 'crearEducaciones']);
-    Route::post('/cargo/actualizarEducaciones',[CargoController::class, 'actualizarEducaciones']);
 
     // Grados
     Route::get('/grado/getGradosFull', [GradoController::class, 'getGradosFull']);

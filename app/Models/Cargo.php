@@ -27,7 +27,7 @@ class Cargo extends Model
                             $request->input('cargo'),
                             $request->input('descripcion'),
                             $request->input('categoria_id'),
-                            $request->input('clase_categoria_id'),
+                            $request->input('clase_cargo_id'),
                             $request->input('activo') == true ? 'S' : 'N',
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')
