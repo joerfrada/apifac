@@ -23,6 +23,7 @@ class Grado extends Model
         $db = DB::select("exec pr_crud_app_grados ?,?,?,?,?,?,?,?,?,?,?",
                         [
                             $evento,
+                            $request->input('grado_id'),
                             $request->input('grado'),
                             $request->input('descripcion'),
                             $request->input('duracion'),
