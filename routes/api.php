@@ -34,6 +34,7 @@ Route::post('login', [UsuarioController::class, 'login']);
 
 // Listas Dinamicas
 Route::get('/listadinamica/getListasDinamicasFull',[ListaDinamicaController::class, 'getListasDinamicasFull']);
+// Route::post('/rutacarrera/getCargosByRutas', [RutaCarreraController::class, 'getCargosByRutas']);
 
 // Autenticar los controladores
 Route::group(['middleware' => ['jwt.verify']], function() {
@@ -120,6 +121,19 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/rutacarrera/crearLineasCargos', [RutaCarreraController::class, 'crearLineasCargos']);
     Route::post('/rutacarrera/actualizarLineasCargos', [RutaCarreraController::class, 'actualizarLineasCargos']);
     Route::post('/rutacarrera/getLineasCargos', [RutaCarreraController::class, 'getLineasCargos']);
+    Route::post('/rutacarrera/getRutas', [RutaCarreraController::class, 'getRutas']);
+    Route::post('/rutacarrera/crearRutas', [RutaCarreraController::class, 'crearRutas']);
+    Route::post('/rutacarrera/actualizarRutas', [RutaCarreraController::class, 'actualizarRutas']);
+    Route::post('/rutacarrera/getRutasByRutaCarrera', [RutaCarreraController::class, 'getRutasByRutaCarrera']);
+    Route::post('/rutacarrera/getCargosByRutas', [RutaCarreraController::class, 'getCargosByRutas']);
+    Route::post('/rutacarrera/getGradosByEspecialidad', [RutaCarreraController::class, 'getGradosByEspecialidad']);
+    Route::post('/rutacarrera/getGradosDetalleByEspecialidad', [RutaCarreraController::class, 'getGradosDetalleByEspecialidad']);
+    Route::post('/rutacarrera/getGradosDetalleCargo', [RutaCarreraController::class, 'getGradosDetalleCargo']);
+    Route::post('/rutacarrera/getGradosDetalleRequerimiento', [RutaCarreraController::class, 'getGradosDetalleRequerimiento']);
+    Route::post('/rutacarrera/getCuerposByCategoria', [RutaCarreraController::class, 'getCuerposByCategoria']);
+    Route::post('/rutacarrera/getEspecialidadesByCategoriaCuerpo', [RutaCarreraController::class, 'getEspecialidadesByCategoriaCuerpo']);
+    Route::post('/rutacarrera/getAreasByCategoriaEspecialidad', [RutaCarreraController::class, 'getAreasByCategoriaEspecialidad']);
+    Route::post('/rutacarrera/getDetalleCargoRutaCarrera', [RutaCarreraController::class, 'getDetalleCargoRutaCarrera']);
 
     // Usuarios
     Route::get('/usuario/getUsuariosFull', [UsuarioController::class, 'getUsuariosFull']);

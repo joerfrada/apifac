@@ -16,11 +16,11 @@ class Cargo extends Model
     protected $primaryKey = 'cargo_id';
 
     protected $fillable = [
-        'cargo,descripcion,categoria_id,clase_categoria_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'cargo,descripcion,categoria_id,clase_categoria_id,cargo_ruta_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_cargo(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_cargos ?,?,?,?,?,?,?,?,?", 
+        $db = DB::select("exec pr_crud_app_cargos ?,?,?,?,?,?,?,?,?,?", 
                         [
                             $evento,
                             $request->input('cargo_id'),
@@ -28,6 +28,7 @@ class Cargo extends Model
                             $request->input('descripcion'),
                             $request->input('categoria_id'),
                             $request->input('clase_cargo_id'),
+                            $request->input('cargo_ruta_id'),
                             $request->input('activo') == true ? 'S' : 'N',
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')

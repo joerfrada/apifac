@@ -16,18 +16,20 @@ class Requerimiento extends Model
     protected $primaryKey = 'requerimiento_id';
 
     protected $fillable = [
-        'requerimiento,categoria_id,especialidad_id,grado_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'requerimiento,categoria_id,especialidad_id,especialidad,grado_id,grado,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_requerimientos(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_requerimientos ?,?,?,?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_requerimientos ?,?,?,?,?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('requerimiento_id'),
                             $request->input('requerimiento'),
                             $request->input('categoria_id'),
                             $request->input('especialidad_id'),
+                            $request->input('especialidad'),
                             $request->input('grado_id'),
+                            $request->input('grado'),
                             $request->input('activo') == true ? 'S' : 'N',
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')

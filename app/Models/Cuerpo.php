@@ -46,4 +46,9 @@ class Cuerpo extends Model
         $db = DB::select("exec pr_get_app_cuerpos_full");
         return $db;
     }
+
+    public function get_cuerpos_by_categoria(Request $request) {
+        $db = DB::select("exec pr_get_app_cuerpos_by_categoria ?", array($request->input('tipo_categoria_id')));
+        return $db;
+    }
 }

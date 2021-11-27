@@ -16,18 +16,19 @@ class Area extends Model
     protected $primaryKey = 'area_id';
 
     protected $fillable = [
-        'tipo_categoria_id,sigla,area,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'tipo_categoria_id,sigla,area,especialidad_id,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     // Crear/Actuallizar
     public function crud_areas(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_areas ?,?,?,?,?,?,?", 
+        $db = DB::select("exec pr_crud_app_areas ?,?,?,?,?,?,?,?", 
                         [
                             $evento,
                             $request->input('area_id'),
                             $request->input('tipo_categoria_id'),
                             $request->input('sigla'),
                             $request->input('area'),
+                            $request->input('especialidad_id'),
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')
                         ]);
@@ -46,6 +47,15 @@ class Area extends Model
 
     public function get_areas_full() {
         $db = DB::select("exec pr_get_app_areas_full");
+        return $db;
+    }
+
+    public function get_areas_by_categoria_especialidad(Request $request) {
+        $db = DB::select("exec pr_get_app_areas_by_categoria_especialidad ?,?",
+                        [
+                            $request->input('tipo_categoria_id'),
+                            $request->input('especialidad_id')
+                        ]);
         return $db;
     }
 }
