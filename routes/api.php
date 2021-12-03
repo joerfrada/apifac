@@ -134,6 +134,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/rutacarrera/getEspecialidadesByCategoriaCuerpo', [RutaCarreraController::class, 'getEspecialidadesByCategoriaCuerpo']);
     Route::post('/rutacarrera/getAreasByCategoriaEspecialidad', [RutaCarreraController::class, 'getAreasByCategoriaEspecialidad']);
     Route::post('/rutacarrera/getDetalleCargoRutaCarrera', [RutaCarreraController::class, 'getDetalleCargoRutaCarrera']);
+    Route::get('/rutacarrera/getCuerposEspecialidadesAreasRutaCarrera', [RutaCarreraController::class, 'getCuerposEspecialidadesAreasRutaCarrera']);
 
     // Usuarios
     Route::get('/usuario/getUsuariosFull', [UsuarioController::class, 'getUsuariosFull']);

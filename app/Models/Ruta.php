@@ -16,11 +16,11 @@ class Ruta extends Model
     protected $primaryKey = 'ruta_id';
 
     protected $fillable = [
-        'ruta_carrera_id,cargo_grado_id,cargo_prev_id,tipo_cargo_id,grado_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'ruta_carrera_id,cargo_id,cargo_prev_id,tipo_cargo_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_rutas(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_rutas ?,?,?,?,?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_rutas ?,?,?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('ruta_id'),
@@ -28,7 +28,6 @@ class Ruta extends Model
                             $request->input('cargo_id'),
                             $request->input('cargo_prev_id'),
                             $request->input('tipo_cargo_id'),
-                            $request->input('grado_id'),
                             $request->input('activo') == true ? 'S' : 'N',
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')
@@ -50,4 +49,21 @@ class Ruta extends Model
         $db = DB::select("exec pr_get_cargos_by_rutas ?", array($request->input('especialidad_id')));
         return $db;
     }
+
+    public function buildTree($elements, $parentId = 0) {
+        $branch = array();
+    
+        foreach ($elements as $element) {
+            if ($element['parent_id'] == $parentId) {
+                $children = $this->buildTree($elements, $element['id']);
+                if ($children) {
+                    $element['children'] = $children;
+                }
+                $branch[] = $element;
+            }
+        }
+    
+        return $branch;
+    }
+
 }

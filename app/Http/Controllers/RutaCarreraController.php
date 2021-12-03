@@ -206,7 +206,27 @@ class RutaCarreraController extends Controller
 
         $datos = $model->get_cargos_by_rutas($request);
 
-        $response = array('result' => current((Array)$datos), 'tipo' => 0);
+        $data = array();
+        foreach ($datos as $row) {
+            $tmp = array();
+            $tmp['id'] = $row->id;
+            $tmp['grado'] = $row->grado;
+            $tmp['nivel'] = $row->nivel;
+            $tmp['cargo'] = $row->cargo;
+            $tmp['cargo_id'] = $row->cargo_id;
+            $tmp['name'] = $row->name;
+            $tmp['className'] = $row->className;
+            $tmp['especialidad_id'] = $row->especialidad_id;
+            $tmp['tipo_ruta_id'] = $row->tipo_ruta_id;
+            $tmp['parent_id'] = $row->parent_id;
+            $tmp['children'] = array();
+
+            array_push($data, $tmp);
+        }
+
+        $result = $model->buildTree($data);
+
+        $response = array('result' => current($result), 'tipo' => 0);
 
         return response()->json($response, 200);
     }
@@ -292,6 +312,17 @@ class RutaCarreraController extends Controller
         $model = new RutaCarrera();
 
         $datos = $model->get_detalle_cargo_ruta_carrera($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function getCuerposEspecialidadesAreasRutaCarrera() {
+        $model = new RutaCarrera();
+
+        $datos = $model->get_cuerpos_especialidades_areas_ruta_carrera();
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);

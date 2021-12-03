@@ -91,4 +91,9 @@ class RutaCarrera extends Model
         $db = DB::select('exec pr_get_detalle_cargo_ruta_carrera ?', array($request->input('cargo_id')));
         return $db;
     }
+
+    public function get_cuerpos_especialidades_areas_ruta_carrera() {
+        $db = DB::select('exec pr_get_app_cuerpos_especialidades_areas_ruta_carrera');
+        return $db;
+    }
 }
