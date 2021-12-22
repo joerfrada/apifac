@@ -68,4 +68,15 @@ class GradoController extends Controller
             return response()->json(array('tipo' => -1, 'mensaje' => $e));
         }
     }
+
+    public function getDetalleGrados(Request $request) {
+        $model = new Grado();
+
+        $datos = $model->get_detalle_grados($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
 }

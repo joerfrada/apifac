@@ -16,7 +16,7 @@ class Grado extends Model
     protected $primaryKey = 'grado_id';
 
     protected $fillable = [
-        'grado,descripcion,duracion,nivel_id,grado_previo_id,categoria_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'grado,descripcion,duracion,nivel_id,grado_previo_id,categoria_id,parent_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_grados(Request $request, $evento) {
@@ -49,6 +49,11 @@ class Grado extends Model
 
     public function get_grados_full() {
         $db = DB::select("exec pr_get_app_grados_full");
+        return $db;
+    }
+
+    public function get_detalle_grados(Request $request) {
+        $db = DB::select("exec pr_get_detalle_grados ?", array($request->input('grado_id')));
         return $db;
     }
 }

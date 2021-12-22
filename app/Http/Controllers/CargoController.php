@@ -76,6 +76,17 @@ class CargoController extends Controller
         }
     }
 
+    public function getDetalleCargos(Request $request) {
+        $model = new Cargo();
+
+        $datos = $model->get_detalle_cargos($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
     public function getCargosGradosByCargoId(Request $request) {
         $model = new CargoGrado();
 
@@ -172,5 +183,38 @@ class CargoController extends Controller
         catch (Exception $e) {
             return response()->json(array('tipo' => -1, 'mensaje' => $e));
         }
+    }
+
+    public function getHistorialCuerposByCargoGrado(Request $request) {
+        $model = new CargoConfiguracion();
+
+        $datos = $model->get_historial_cuerpos_by_cargo_grado($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function getHistorialEspecialidadesByCargoGrado(Request $request) {
+        $model = new CargoConfiguracion();
+
+        $datos = $model->get_historial_especialidedades_by_cargo_grado($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function getHistorialAreasByCargoGrado(Request $request) {
+        $model = new CargoConfiguracion();
+
+        $datos = $model->get_historial_areas_by_cargo_grado($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
     }
 }

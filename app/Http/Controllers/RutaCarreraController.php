@@ -211,13 +211,10 @@ class RutaCarreraController extends Controller
             $tmp = array();
             $tmp['id'] = $row->id;
             $tmp['grado'] = $row->grado;
-            $tmp['nivel'] = $row->nivel;
+            $tmp['grado_id'] = $row->grado_id;
             $tmp['cargo'] = $row->cargo;
             $tmp['cargo_id'] = $row->cargo_id;
-            $tmp['name'] = $row->name;
             $tmp['className'] = $row->className;
-            $tmp['especialidad_id'] = $row->especialidad_id;
-            $tmp['tipo_ruta_id'] = $row->tipo_ruta_id;
             $tmp['parent_id'] = $row->parent_id;
             $tmp['children'] = array();
 
@@ -323,6 +320,17 @@ class RutaCarreraController extends Controller
         $model = new RutaCarrera();
 
         $datos = $model->get_cuerpos_especialidades_areas_ruta_carrera();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function getEspecialidadesRutas() {
+        $model = new RutaCarrera();
+
+        $datos = $model->get_app_especialidades_rutas();
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);

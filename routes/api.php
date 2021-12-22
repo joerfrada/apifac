@@ -34,7 +34,6 @@ Route::post('login', [UsuarioController::class, 'login']);
 
 // Listas Dinamicas
 Route::get('/listadinamica/getListasDinamicasFull',[ListaDinamicaController::class, 'getListasDinamicasFull']);
-// Route::post('/rutacarrera/getCargosByRutas', [RutaCarreraController::class, 'getCargosByRutas']);
 
 // Autenticar los controladores
 Route::group(['middleware' => ['jwt.verify']], function() {
@@ -48,6 +47,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/cargo/getCargos', [CargoController::class, 'getCargos']);
     Route::post('/cargo/crearCargos', [CargoController::class, 'crearCargos']);
     Route::post('/cargo/actualizarCargos', [CargoController::class, 'actualizarCargos']);
+    Route::post('/cargo/getDetalleCargos', [CargoController::class, 'getDetalleCargos']);
     Route::get('/cargo/getCargosFull', [CargoController::class, 'getCargosFull']);
 
     // Cargos Grado
@@ -83,6 +83,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/grado/getGrados', [GradoController::class, 'getGrados']);
     Route::post('/grado/crearGrados', [GradoController::class, 'crearGrados']);
     Route::post('/grado/actualizarGrados', [GradoController::class, 'actualizarGrados']);
+    Route::post('/grado/getDetalleGrados', [GradoController::class, 'getDetalleGrados']);
 
     // Listas Dinamicas
     Route::post('/listadinamica/getNombresListas',[ListaDinamicaController::class, 'getNombresListas']);
@@ -135,6 +136,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/rutacarrera/getAreasByCategoriaEspecialidad', [RutaCarreraController::class, 'getAreasByCategoriaEspecialidad']);
     Route::post('/rutacarrera/getDetalleCargoRutaCarrera', [RutaCarreraController::class, 'getDetalleCargoRutaCarrera']);
     Route::get('/rutacarrera/getCuerposEspecialidadesAreasRutaCarrera', [RutaCarreraController::class, 'getCuerposEspecialidadesAreasRutaCarrera']);
+    Route::get('/rutacarrera/getEspecialidadesRutas', [RutaCarreraController::class, 'getEspecialidadesRutas']);
 
     // Usuarios
     Route::get('/usuario/getUsuariosFull', [UsuarioController::class, 'getUsuariosFull']);

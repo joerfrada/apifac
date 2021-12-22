@@ -18,113 +18,36 @@ class UsuarioController extends Controller
 {
     public function login(Request $request) {
         $p_usuario = $request->get('usuario');
-        $p_password = $request->get('password');
-
-        // Si developer es true sin LDAP, sino con LDAP
-        $developer = true;
         $m_usuario = new Usuario();
 
-        if (!$developer) {
-            $ldaphost = "ldap.localdomain.com";
-            $ldapport = 389;
+        $users = DB::table('tb_app_usuarios')->where('usuario', $p_usuario)->get();
 
-            //user dn
-            $ldapusername = "uid=".$p_usuario.",ou=users,dc=localdomain,dc=com";
-            $ldappassword = $p_password;
+        if (!$users->isEmpty()) {
+            $usuario = $m_usuario->getLoginUsuario($p_usuario);
 
-            // connect to active directory
-            $ldapconn = ldap_connect($ldaphost, $ldapport);
+            $m_menu = new Menu();
+            $m_usuariomenu = new UsuarioMenu();
 
-            // set connection is using protocol version 3, if not will occur warning error.
-            ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+            $data = array();
+            foreach ($usuario as $row) {
+                $tmp = array();
+                $tmp['usuario_id'] = $row->usuario_id;
+                $tmp['usuario'] = $row->usuario;
+                $tmp['nombre_completo'] = $row->nombre_completo;
+                $tmp['avatar'] = $row->avatar;
+                $tmp['correo_electronico'] = $row->correo_electronico;
+                $tmp['tipo_perfil'] = $row->tipo_perfil;
+                $tmp['menus'] = $m_menu->get_menu_id($m_usuariomenu->getUsuarioMenu($row->usuario_id));
 
-            if ($ldapconn) {
-                $ldapbind = @ldap_bind($ldapconn, $ldapusername, $ldappassword);
-                
-                if ($ldapbind) {
-                    $usuario = $m_usuario->getLoginUsuario($p_usuario);
-
-                    $m_menu = new Menu();
-                    $m_usuariomenu = new UsuarioMenu();
-
-                    $data = array();
-                    foreach ($usuario as $row) {
-                        $tmp = array();
-                        $tmp['usuario_id'] = $row->usuario_id;
-                        $tmp['usuario'] = $row->usuario;
-                        $tmp['nombre_completo'] = $row->nombre_completo;
-                        $tmp['avatar'] = $row->avatar;
-                        $tmp['correo_electronico'] = $row->correo_electronico;
-                        $tmp['tipo_perfil'] = $row->tipo_perfil;
-                        $tmp['menus'] = $m_menu->get_menu_id($m_usuariomenu->getUsuarioMenu($row->usuario_id));
-
-                        array_push($data, $tmp);
-                    }
-
-                    $user = Usuario::first();
-                    $token = JWTAuth::fromUser($user);
-
-                    $response = json_encode(array('result' => $data), JSON_NUMERIC_CHECK);
-                    $response = json_decode($response);
-                    return response()->json(array('user' => $response, 'tipo' => 0, 'token' => $token));
-                }
-                else {
-                    $response = json_encode(array('result' => [], 'tipo' => -1, 'mensaje' => 'Usuario y/o Contraseña son incorrectos'), JSON_NUMERIC_CHECK);
-                    $response = json_decode($response);
-                    return response()->json($response);
-                }
+                array_push($data, $tmp);
             }
-            else {
-                return response()->json(array('tipo' => -1, 'mensaje' => 'No se puede conectar el servidor LDAP'));
-            }
-        }
-        else {
-            $p_usuario = $request->get('usuario');
-            $p_password = $request->get('password');
 
-            $users = DB::table('tb_app_usuarios')->where('usuario', $p_usuario)->get();
+            $user = Usuario::first();
+            $token = JWTAuth::fromUser($user);
 
-            if (!$users->isEmpty()) {
-                $db = $users->first();
-
-                if (Hash::check($p_password, $db->password)) {
-                    $usuario = $m_usuario->getLoginUsuario($p_usuario);
-
-                    $m_menu = new Menu();
-                    $m_usuariomenu = new UsuarioMenu();
-
-                    $data = array();
-                    foreach ($usuario as $row) {
-                        $tmp = array();
-                        $tmp['usuario_id'] = $row->usuario_id;
-                        $tmp['usuario'] = $row->usuario;
-                        $tmp['nombre_completo'] = $row->nombre_completo;
-                        $tmp['avatar'] = $row->avatar;
-                        $tmp['correo_electronico'] = $row->correo_electronico;
-                        $tmp['tipo_perfil'] = $row->tipo_perfil;
-                        $tmp['menus'] = $m_menu->get_menu_id($m_usuariomenu->getUsuarioMenu($row->usuario_id));
-
-                        array_push($data, $tmp);
-                    }
-
-                    $user = Usuario::first();
-                    $token = JWTAuth::fromUser($user);
-
-                    $response = json_encode(array('result' => $data), JSON_NUMERIC_CHECK);
-                    $response = json_decode($response);
-                    return response()->json(array('user' => $response, 'tipo' => 0, 'token' => $token));
-                }
-                else {
-                    $response = json_encode(array('result' => [], 'tipo' => -1, 'mensaje' => 'Usuario y/o Contraseña son incorrectos'), JSON_NUMERIC_CHECK);
-                    $response = json_decode($response);
-                    return response()->json($response);
-                }
-            }
-            else {
-                $response = json_encode(array('result' => [], 'tipo' => -1, 'mensaje' => 'Usuario y/o Contraseña son incorrectos'), JSON_NUMERIC_CHECK);
-                $response = json_decode($response);
-                return response()->json($response);
-            }
+            $response = json_encode(array('result' => $data), JSON_NUMERIC_CHECK);
+            $response = json_decode($response);
+            return response()->json(array('user' => $response, 'tipo' => 0, 'token' => $token));
         }
     }
 

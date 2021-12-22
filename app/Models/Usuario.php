@@ -19,11 +19,7 @@ class Usuario extends Authenticatable implements JWTSubject
     protected $primaryKey = 'usuario_id';
 
     protected $fillable = [
-        'usuario,password,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
-    ];
-
-    protected $hidden = [
-        'password'
+        'usuario,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_usuarios(Request $request, $evento) {

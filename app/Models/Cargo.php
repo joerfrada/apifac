@@ -49,4 +49,9 @@ class Cargo extends Model
         $db = DB::select("exec pr_get_app_cargos_full");
         return $db;
     }
+
+    public function get_detalle_cargos(Request $request) {
+        $db = DB::select("exec pr_get_detalle_cargos ?", array($request->input('cargo_id')));
+        return $db;
+    }
 }
