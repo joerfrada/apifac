@@ -16,7 +16,7 @@ class Grado extends Model
     protected $primaryKey = 'grado_id';
 
     protected $fillable = [
-        'grado,descripcion,duracion,nivel_id,grado_previo_id,categoria_id,parent_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'grado,descripcion,duracion,nivel_id,grado_previo_id,categoria_id,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_grados(Request $request, $evento) {
