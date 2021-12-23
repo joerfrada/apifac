@@ -20,13 +20,12 @@ class Ruta extends Model
     ];
 
     public function crud_rutas(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_rutas ?,?,?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_rutas ?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('ruta_id'),
                             $request->input('ruta_carrera_id'),
                             $request->input('cargo_id'),
-                            $request->input('cargo_prev_id'),
                             $request->input('activo') == true ? 'S' : 'N',
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')
