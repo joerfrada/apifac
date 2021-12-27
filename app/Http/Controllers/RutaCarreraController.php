@@ -207,23 +207,30 @@ class RutaCarreraController extends Controller
         $datos = $model->get_cargos_by_rutas($request);
 
         $data = array();
-        foreach ($datos as $row) {
+
+        foreach ($datos as $item) {
             $tmp = array();
-            $tmp['id'] = $row->id;
-            $tmp['grado'] = $row->grado;
-            $tmp['grado_id'] = $row->grado_id;
-            $tmp['cargo'] = $row->cargo;
-            $tmp['cargo_id'] = $row->cargo_id;
-            $tmp['className'] = $row->className;
-            $tmp['parent_id'] = $row->parent_id;
-            $tmp['children'] = array();
+            $tmp['level'] = $item->level;
+            $tmp['cargos'] = array();
+            $cargos = explode(';', $item->cargos);
+            $cargo_ids = explode(';', $item->cargo_ids);
+            $clase_cargos = explode(';', $item->clase_cargos);
+            for ($i = 0; $i < count($cargos); $i++) {
+                $tmp_cargos = array();
+                $tmp_cargos['grado_id'] = $item->grado_id;
+                $tmp_cargos['grado'] = $item->grado;
+                $tmp_cargos['cargo'] = $cargos[$i];
+                $tmp_cargos['cargo_id'] = $cargo_ids[$i];
+                $tmp_cargos['clase_cargo'] = $clase_cargos[$i];
+
+                array_push($tmp['cargos'], $tmp_cargos);
+            }
 
             array_push($data, $tmp);
         }
 
-        $result = $model->buildTree($data);
-
-        $response = array('result' => current($result), 'tipo' => 0);
+        $response = json_encode(array('result' => $data, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
 
         return response()->json($response, 200);
     }

@@ -69,4 +69,24 @@ class Ruta extends Model
         return $branch;
     }
 
+    public function genTree($items, $id = 'id', $pid = 'parent_id', $son = 'children') {
+        $tree = array();
+        $tmpMap = array();
+ 
+        foreach ($items as $item) {
+            $tmpMap[$item[$id]] = $item;
+        }
+ 
+        foreach ($items as $item) {
+            if (isset($tmpMap[$item[$pid]])) {
+                $tmpMap[$item[$pid]][$son][] = &$tmpMap[$item[$id]];
+            } 
+            else {
+                $tree[] = &$tmpMap[$item[$id]];
+            }
+        }
+        unset($tmpMap);
+        return $tree;
+    }
+
 }
