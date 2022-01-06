@@ -105,4 +105,9 @@ class RutaCarrera extends Model
         $db = DB::select('exec pr_get_app_especialidades_rutas');
         return $db;
     }
+
+    public function get_ruta_carrera_activos() {
+        $db = DB::select('exec pr_get_ruta_carrera_activos');
+        return $db;
+    }
 }

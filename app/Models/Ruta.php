@@ -47,46 +47,15 @@ class Ruta extends Model
         $db = DB::select("exec pr_get_cargos_by_rutas ?,?,?",
                         [
                             $request->input('tipo_ruta_id'),
-                            $request->input('categoria_id'),
+                            $request->input('tipo_categoria_id'),
                             $request->input('especialidad_id')
                         ]);
         return $db;
     }
 
-    public function buildTree($elements, $parentId = 0) {
-        $branch = array();
-    
-        foreach ($elements as $element) {
-            if ($element['parent_id'] == $parentId) {
-                $children = $this->buildTree($elements, $element['id']);
-                if ($children) {
-                    $element['children'] = $children;
-                }
-                $branch[] = $element;
-            }
-        }
-    
-        return $branch;
-    }
-
-    public function genTree($items, $id = 'id', $pid = 'parent_id', $son = 'children') {
-        $tree = array();
-        $tmpMap = array();
- 
-        foreach ($items as $item) {
-            $tmpMap[$item[$id]] = $item;
-        }
- 
-        foreach ($items as $item) {
-            if (isset($tmpMap[$item[$pid]])) {
-                $tmpMap[$item[$pid]][$son][] = &$tmpMap[$item[$id]];
-            } 
-            else {
-                $tree[] = &$tmpMap[$item[$id]];
-            }
-        }
-        unset($tmpMap);
-        return $tree;
+    public function get_app_rutas_full() {
+        $db = DB::select("exec pr_get_app_rutas_full");
+        return $db;
     }
 
 }

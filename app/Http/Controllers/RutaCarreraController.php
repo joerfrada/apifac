@@ -210,7 +210,6 @@ class RutaCarreraController extends Controller
 
         foreach ($datos as $item) {
             $tmp = array();
-            $tmp['level'] = $item->level;
             $tmp['cargos'] = array();
             $cargos = explode(';', $item->cargos);
             $cargo_ids = explode(';', $item->cargo_ids);
@@ -338,6 +337,28 @@ class RutaCarreraController extends Controller
         $model = new RutaCarrera();
 
         $datos = $model->get_app_especialidades_rutas();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function getRutasFull() {
+        $model = new Ruta();
+
+        $datos = $model->get_app_rutas_full();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function getRutaCarreraActivos() {
+        $model = new RutaCarrera();
+
+        $datos = $model->get_ruta_carrera_activos();
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);
