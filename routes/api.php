@@ -14,6 +14,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PerfilUsuarioController;
 use App\Http\Controllers\RequerimientoController;
+use App\Http\Controllers\RolController;
 use App\Http\Controllers\RutaCarreraController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UsuarioMenuController;
@@ -139,6 +140,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/rutacarrera/getEspecialidadesRutas', [RutaCarreraController::class, 'getEspecialidadesRutas']);
     Route::get('/rutacarrera/getRutasFull', [RutaCarreraController::class, 'getRutasFull']);
     Route::get('/rutacarrera/getRutaCarreraActivos', [RutaCarreraController::class, 'getRutaCarreraActivos']);
+
+    // Roles
+    Route::post('/rol/getRoles', [RolController::class, 'getRoles']);
+    Route::post('/rol/crearRoles', [RolController::class, 'crearRoles']);
+    Route::post('/rol/actualizarRoles', [RolController::class, 'actualizarRoles']);
 
     // Usuarios
     Route::get('/usuario/getUsuariosFull', [UsuarioController::class, 'getUsuariosFull']);
