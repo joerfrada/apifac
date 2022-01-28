@@ -13,6 +13,7 @@ use Log;
 use App\Models\Menu;
 use App\Models\Usuario;
 use App\Models\UsuarioMenu;
+use App\Models\UsuarioRol;
 
 class UsuarioController extends Controller
 {
@@ -74,8 +75,6 @@ class UsuarioController extends Controller
     }
 
     public function crearUsuarios(Request $request) {
-        Log::info($request);
-
         $model = new Usuario();
 
         try {
@@ -96,8 +95,6 @@ class UsuarioController extends Controller
     }
 
     public function actualizarUsuarios(Request $request) {
-        Log::info($request);
-        
         $model = new Usuario();
         
         try {
@@ -105,6 +102,55 @@ class UsuarioController extends Controller
 
             if ($db) {
                 $response = json_encode(array('mensaje' => 'Fue actualizado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);
+                $response = json_decode($response);
+
+                return response()->json($response, 200);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(array('tipo' => -1, 'mensaje' => $e));
+        }
+    }
+
+    public function getUsuariosRolesById(Request $request) {
+        $model = new UsuarioRol();
+
+        $datos = $model->get_usuarios_roles_by_usuario_id($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function crearUsuarioRol(Request $request) {
+        $model = new UsuarioRol();
+
+        try {
+            $db = $model->crud_usuarios_roles($request, 'C');
+
+            if ($db) {
+                $id = $db[0]->id;
+
+                $response = json_encode(array('mensaje' => 'Fue creado exitosamente.', 'tipo' => 0, 'id' => $id), JSON_NUMERIC_CHECK);
+                $response = json_decode($response);
+
+                return response()->json($response, 200);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(array('tipo' => -1, 'mensaje' => $e));
+        }
+    }
+
+    public function actualizarUsuarioRol(Request $request) {
+        $model = new UsuarioRol();
+
+        try {
+            $db = $model->crud_usuarios_roles($request, 'U');
+
+            if ($db) {
+                $response = json_encode(array('mensaje' => 'Fue creado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);
                 $response = json_decode($response);
 
                 return response()->json($response, 200);

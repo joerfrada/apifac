@@ -16,11 +16,11 @@ class Rol extends Model
     protected $primaryKey = 'rol_id';
 
     protected $fillable = [
-        'rol_id,rol,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'rol_id,rol,descripcion,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_roles(Request $request, $evento) {
-        $db = DB::select('exec pr_crud_app_roles ?,?,?,?,?,?',
+        $db = DB::select("exec pr_crud_app_roles ?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('rol_id'),

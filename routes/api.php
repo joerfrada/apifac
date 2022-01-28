@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AplicacionController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CargoController;
 use App\Http\Controllers\CuerpoController;
@@ -38,12 +37,6 @@ Route::get('/listadinamica/getListasDinamicasFull',[ListaDinamicaController::cla
 
 // Autenticar los controladores
 Route::group(['middleware' => ['jwt.verify']], function() {
-    // Aplicaciones
-    Route::get('/aplicacion/getAplicacionesFull', [AplicacionController::class, 'getAplicacionesFull']);
-    Route::post('/aplicacion/getAplicaciones', [AplicacionController::class, 'getAplicaciones']);
-    Route::post('/aplicacion/crearAplicaciones', [AplicacionController::class, 'crearAplicaciones']);
-    Route::post('/aplicacion/actualizarAplicaciones', [AplicacionController::class, 'actualizarAplicaciones']);
-
     // Cargos
     Route::post('/cargo/getCargos', [CargoController::class, 'getCargos']);
     Route::post('/cargo/crearCargos', [CargoController::class, 'crearCargos']);
@@ -145,12 +138,18 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/rol/getRoles', [RolController::class, 'getRoles']);
     Route::post('/rol/crearRoles', [RolController::class, 'crearRoles']);
     Route::post('/rol/actualizarRoles', [RolController::class, 'actualizarRoles']);
+    Route::post('/rol/crearRolPrivilegios', [RolController::class, 'crearRolPrivilegios']);
+    Route::post('/rol/actualizarRolPrivilegios', [RolController::class, 'actualizarRolPrivilegios']);
+    Route::post('/rol/getRolPrivilegiosById', [RolController::class, 'getRoles']);
 
     // Usuarios
     Route::get('/usuario/getUsuariosFull', [UsuarioController::class, 'getUsuariosFull']);
     Route::post('/usuario/getUsuarios', [UsuarioController::class, 'getUsuarios']);
     Route::post('/usuario/crearUsuarios', [UsuarioController::class, 'crearUsuarios']);
     Route::post('/usuario/actualizarUsuarios', [UsuarioController::class, 'actualizarUsuarios']);
+    Route::post('/usuario/crearUsuarioRol', [UsuarioController::class, 'crearUsuarioRol']);
+    Route::post('/usuario/actualizarUsuarioRol', [UsuarioController::class, 'actualizarUsuarioRol']);
+    Route::post('/usuario/getUsuariosRolesById', [UsuarioController::class, 'getUsuariosRolesById']);
 
     // Usuarios-Menu
     Route::post('/usuariomenu/crearUsuarioMenu', [UsuarioMenuController::class, 'crearUsuarioMenu']);
