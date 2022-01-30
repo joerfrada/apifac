@@ -26,7 +26,7 @@ class Menu extends Model
                             $request->input('menu_id'),
                             $request->input('nombre_menu'),
                             $request->input('tipo_menu_id'),
-                            $request->input('menu_padre_id'),
+                            $request->input('menu_padre_id') == 0 ? null : $request->input('menu_padre_id'),
                             $request->input('icono'),
                             $request->input('tooltip'),
                             $request->input('url'),

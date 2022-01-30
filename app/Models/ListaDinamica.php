@@ -26,7 +26,7 @@ class ListaDinamica extends Model
                             $request->input('nombre_lista_id'),
                             $request->input('nombre_lista'),
                             $request->input('descripcion'),
-                            $request->input('nombre_lista_padre_id'),
+                            $request->input('nombre_lista_padre_id') == 0 ? null : $request->input('nombre_lista_padre_id'),
                             $request->input('activo') == true ? 'S' : 'N',
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')

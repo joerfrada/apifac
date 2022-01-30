@@ -20,19 +20,18 @@ class CargoConfiguracion extends Model
     ];
 
     public function crud_cargos_configuracion(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_cargos_configuracion ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_cargos_configuracion ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('cargo_configuracion_id'),
                             $request->input('cargo_grado_id'),
                             $request->input('puesto_cantidad'),
-                            $request->input('cargo_jefe_inmediato_id'),
-                            $request->input('cargo_jefe_inmediato'),
-                            $request->input('nivel1'),
-                            $request->input('nivel2'),
-                            $request->input('nivel3'),
-                            $request->input('nivel4'),
-                            $request->input('nivel5'),
+                            $request->input('cargo_jefe_inmediato_id') == 0 ? null : $request->input('cargo_jefe_inmediato_id'),
+                            $request->input('nivel1') == 0 ? null : $request->input('nivel1'),
+                            $request->input('nivel2') == 0 ? null : $request->input('nivel2'),
+                            $request->input('nivel3') == 0 ? null : $request->input('nivel3'),
+                            $request->input('nivel4') == 0 ? null : $request->input('nivel4'),
+                            $request->input('nivel5') == 0 ? null : $request->input('nivel5'),
                             $request->input('anio'),
                             $request->input('mes'),
                             $request->input('requisito_cargo'),
@@ -59,33 +58,6 @@ class CargoConfiguracion extends Model
 
     public function get_cargos_configuracion_by_cargo_grado_id(Request $request) {
         $db = DB::select("exec pr_get_app_cargos_configuracion_by_cargo_grado_id ?", array($request->input('cargo_grado_id')));
-        return $db;
-    }
-
-    public function get_historial_cuerpos_by_cargo_grado(Request $request) {
-        $db = DB::select("exec pr_get_historial_cuerpos_by_cargo_grado ?,?",
-                        [
-                            $request->input('cargo_grado_id'),
-                            $request->input('historial_cuerpo_id')
-                        ]);
-        return $db;
-    }
-
-    public function get_historial_especialidades_by_cargo_grado(Request $request) {
-        $db = DB::select("exec pr_get_historial_especialidades_by_cargo_grado ?,?",
-                        [
-                            $request->input('cargo_grado_id'),
-                            $request->input('historial_especialidad_id')
-                        ]);
-        return $db;
-    }
-
-    public function get_historial_areas_by_cargo_grado(Request $request) {
-        $db = DB::select("exec pr_get_historial_areas_by_cargo_grado ?,?",
-                        [
-                            $request->input('cargo_grado_id'),
-                            $request->input('historial_area_id')
-                        ]);
         return $db;
     }
 }
