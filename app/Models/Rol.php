@@ -41,4 +41,10 @@ class Rol extends Model
                         ]);
         return $db;
     }
+
+    public function get_roles_activos() {
+        $db = DB::select("exec pr_get_roles_activos");
+
+        return $db;
+    }
 }

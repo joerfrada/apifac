@@ -141,6 +141,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/rol/crearRolPrivilegios', [RolController::class, 'crearRolPrivilegios']);
     Route::post('/rol/actualizarRolPrivilegios', [RolController::class, 'actualizarRolPrivilegios']);
     Route::post('/rol/getRolPrivilegiosById', [RolController::class, 'getRoles']);
+    Route::get('/rol/getRolesActivos', [RolController::class, 'getRolesActivos']);
 
     // Usuarios
     Route::get('/usuario/getUsuariosFull', [UsuarioController::class, 'getUsuariosFull']);

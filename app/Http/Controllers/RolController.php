@@ -21,6 +21,17 @@ class RolController extends Controller
         return response()->json($response, 200);
     }
 
+    public function getRolesActivos() {
+        $model = new Rol();
+
+        $datos = $model->get_roles_activos();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
     public function crearRoles(Request $request) {
         $model = new Rol();
 
