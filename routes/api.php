@@ -156,6 +156,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/usuario/crearUsuarioRol', [UsuarioController::class, 'crearUsuarioRol']);
     Route::post('/usuario/actualizarUsuarioRol', [UsuarioController::class, 'actualizarUsuarioRol']);
     Route::post('/usuario/getUsuariosRolesById', [UsuarioController::class, 'getUsuariosRolesById']);
+    Route::get('/usuario/getRolPrivilegiosPantalla', [UsuarioController::class, 'getRolPrivilegiosPantalla']);
 
     // Usuarios-Menu
     Route::post('/usuariomenu/crearUsuarioMenu', [UsuarioMenuController::class, 'crearUsuarioMenu']);

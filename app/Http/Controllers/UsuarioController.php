@@ -177,6 +177,17 @@ class UsuarioController extends Controller
         }
     }
 
+    public function getRolPrivilegiosPantalla() {
+        $model = new UsuarioRol();
+
+        $datos = $model->get_rol_privilegios_pantalla();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
     public function getAuthenticatedUser() {
         try {
             if (!$user = JWTAuth::parseToken()->authenticate()) {

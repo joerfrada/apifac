@@ -39,4 +39,10 @@ class UsuarioRol extends Model
 
         return $db;
     }
+
+    public function get_rol_privilegios_pantalla() {
+        $db = DB::select("exec pr_get_rol_privilegios_pantalla");
+
+        return $db;
+    }
 }
