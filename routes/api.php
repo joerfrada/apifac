@@ -10,6 +10,7 @@ use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\GradoController;
 use App\Http\Controllers\ListaDinamicaController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ModuloController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PerfilUsuarioController;
 use App\Http\Controllers\RequerimientoController;
@@ -93,6 +94,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/menu/crearMenus', [MenuController::class, 'crearMenus']);
     Route::post('/menu/actualizarMenus', [MenuController::class, 'actualizarMenus']);
 
+    // Modulo
+    
+
     // Perfiles
     Route::post('/perfil/getPerfiles', [PerfilController::class, 'getPerfiles']);
     Route::post('/perfil/crearPerfiles', [PerfilController::class, 'crearPerfiles']);
@@ -140,8 +144,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/rol/actualizarRoles', [RolController::class, 'actualizarRoles']);
     Route::post('/rol/crearRolPrivilegios', [RolController::class, 'crearRolPrivilegios']);
     Route::post('/rol/actualizarRolPrivilegios', [RolController::class, 'actualizarRolPrivilegios']);
-    Route::post('/rol/getRolPrivilegiosById', [RolController::class, 'getRoles']);
+    Route::post('/rol/getRolPrivilegiosById', [RolController::class, 'getRolPrivilegiosById']);
     Route::get('/rol/getRolesActivos', [RolController::class, 'getRolesActivos']);
+    Route::get('/rol/getModulos', [RolController::class, 'getModulos']);
 
     // Usuarios
     Route::get('/usuario/getUsuariosFull', [UsuarioController::class, 'getUsuariosFull']);

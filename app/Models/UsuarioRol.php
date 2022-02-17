@@ -20,12 +20,13 @@ class UsuarioRol extends Model
     ];
 
     public function crud_usuarios_roles(Request $request, $event) {
-        $db = DB::select("exec pr_crud_app_usuarios_roles ?,?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_usuarios_roles ?,?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('usuario_rol_id'),
                             $request->input('usuario_id'),
                             $request->input('rol_id'),
+                            $request->input('rol_privilegio_id'),
                             $request->input('activo') == true ? 'S' : 'N',
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')

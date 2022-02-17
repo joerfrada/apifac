@@ -118,4 +118,15 @@ class RolController extends Controller
             return response()->json(array('tipo' => -1, 'mensaje' => $e));
         }
     }
+
+    public function getModulos() {
+        $model = new RolPrivilegio();
+
+        $datos = $model->get_modulos();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
 }

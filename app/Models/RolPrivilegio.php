@@ -20,12 +20,13 @@ class RolPrivilegio extends Model
     ];
 
     public function crud_roles_privilegios(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_roles_privilegios ?,?,?,?,?,?,?,?,?,?,?,?", 
+        $db = DB::select("exec pr_crud_app_roles_privilegios ?,?,?,?,?,?,?,?,?,?,?,?,?", 
                         [
                             $evento,
                             $request->input('rol_privilegio_id'),
                             $request->input('rol_id'),
                             $request->input('num_pantalla'),
+                            $request->input('modulo'),
                             $request->input('nombre_pantalla'),
                             $request->input('consultar') == true ? 'S' : 'N',
                             $request->input('crear') == true ? 'S' : 'N',
@@ -42,6 +43,11 @@ class RolPrivilegio extends Model
     public function get_roles_privilegios_by_rol_id(Request $request) {
         $db = DB::select("exec pr_get_app_roles_privilegios_by_rol_id ?",  array($request->input('rol_id')));
         
+        return $db;
+    }
+
+    public function get_modulos() {
+        $db = DB::select("exec pr_get_modulos");
         return $db;
     }
 }

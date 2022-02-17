@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Http\Request;
+use PDO;
+use PDOException;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -21,6 +23,23 @@ class Usuario extends Authenticatable implements JWTSubject
     protected $fillable = [
         'usuario,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
+
+    public function checkLogin($username, $password) {
+        $host = env('DB_HOST');
+        $dbname = env('DB_DATABASE');
+        $port = env('PORT');
+
+        try {
+            $conn = new PDO("sqlsrv:server=$host,$port;database=$dbname", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+            $conn->setAttribute(PDO::SQLSRV_ATTR_QUERY_TIMEOUT, 1);
+
+            if ($conn != null) return true;
+        }
+        catch (PDOException $e) {
+            return false;
+        }
+    }
 
     public function crud_usuarios(Request $request, $evento) {
         $db = DB::select("exec pr_crud_app_usuarios ?,?,?,?,?,?",

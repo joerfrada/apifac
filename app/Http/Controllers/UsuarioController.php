@@ -19,7 +19,23 @@ class UsuarioController extends Controller
 {
     public function login(Request $request) {
         $p_usuario = $request->get('usuario');
+        //$p_password = $request->get('password');
         $m_usuario = new Usuario();
+
+        // $users = $m_usuario->checkLogin($p_usuario, $p_password);
+
+        // if ($users == true) {
+        //     $response = json_encode(array('mensaje' => 'Conectado!', 'tipo' => 0), JSON_NUMERIC_CHECK);
+        //     $response = json_decode($response);
+
+        //     return response()->json($response, 200);
+        // }
+        // else {
+        //     $response = json_encode(array('mensaje' => 'Error!', 'tipo' => -1), JSON_NUMERIC_CHECK);
+        //     $response = json_decode($response);
+
+        //     return response()->json($response, 200);
+        // }
 
         $users = DB::table('tb_app_usuarios')->where('usuario', $p_usuario)->get();
 
