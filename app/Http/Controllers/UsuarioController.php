@@ -19,7 +19,8 @@ class UsuarioController extends Controller
 {
     public function login(Request $request) {
         $p_usuario = $request->get('usuario');
-        //$p_password = $request->get('password');
+        $p_password = $request->get('password');
+        
         $m_usuario = new Usuario();
 
         // $users = $m_usuario->checkLogin($p_usuario, $p_password);

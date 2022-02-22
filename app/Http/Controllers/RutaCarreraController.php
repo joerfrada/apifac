@@ -218,9 +218,11 @@ class RutaCarreraController extends Controller
                 $tmp_cargos = array();
                 $tmp_cargos['grado_id'] = $item->grado_id;
                 $tmp_cargos['grado'] = $item->grado;
+                $tmp_cargos['grado_desc'] = $item->grado_desc;
                 $tmp_cargos['cargo'] = $cargos[$i];
                 $tmp_cargos['cargo_id'] = $cargo_ids[$i];
                 $tmp_cargos['clase_cargo'] = $clase_cargos[$i];
+                $tmp_cargos['categoria'] = $item->categoria;
 
                 array_push($tmp['cargos'], $tmp_cargos);
             }

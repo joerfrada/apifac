@@ -49,7 +49,7 @@ class Usuario extends Authenticatable implements JWTSubject
                             $request->input('usuario'),
                             $request->input('nombres'),
                             $request->input('apellidos'),
-                            $request->input('num_idenitificacion'),
+                            $request->input('num_identificacion'),
                             $request->input('activo') == true ? 'S' : 'N',
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')
