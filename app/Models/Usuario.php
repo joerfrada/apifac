@@ -42,7 +42,7 @@ class Usuario extends Authenticatable implements JWTSubject
     }
 
     public function crud_usuarios(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_usuarios ?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_usuarios ?,?,?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('usuario_id'),
