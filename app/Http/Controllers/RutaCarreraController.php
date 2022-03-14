@@ -214,6 +214,7 @@ class RutaCarreraController extends Controller
             $cargos = explode(';', $item->cargos);
             $cargo_ids = explode(';', $item->cargo_ids);
             $clase_cargos = explode(';', $item->clase_cargos);
+            $cargo_rutas = explode(';', $item->cargo_rutas);
             for ($i = 0; $i < count($cargos); $i++) {
                 $tmp_cargos = array();
                 $tmp_cargos['grado_id'] = $item->grado_id;
@@ -222,6 +223,7 @@ class RutaCarreraController extends Controller
                 $tmp_cargos['cargo'] = $cargos[$i];
                 $tmp_cargos['cargo_id'] = $cargo_ids[$i];
                 $tmp_cargos['clase_cargo'] = $clase_cargos[$i];
+                $tmp_cargos['tipo_ruta'] = $cargo_rutas[$i];
                 $tmp_cargos['categoria'] = $item->categoria;
 
                 array_push($tmp['cargos'], $tmp_cargos);
