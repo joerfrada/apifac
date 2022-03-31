@@ -37,4 +37,16 @@ class UsuarioMenu extends Model
 
         return $db;
     }
+
+    public function crud_asignar_menus(Request $request, $evento) {
+        $db = DB::select("exec pr_crud_asignar_menus ?,?,?,?,?",
+                        [
+                            $evento,
+                            $request->input('usuario_id'),
+                            $request->input('usuario_menu_id'),
+                            $request->input('usuario_creador'),
+                            $request->input('usuario_modificador')
+                        ]);
+        return $db;
+    }
 }

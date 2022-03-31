@@ -44,11 +44,12 @@ class Ruta extends Model
     }
 
     public function get_cargos_by_rutas(Request $request) {
-        $db = DB::select("exec pr_get_cargos_by_rutas ?,?,?",
+        $db = DB::select("exec pr_get_cargos_by_rutas ?,?,?,?",
                         [
                             $request->input('tipo_ruta_id'),
                             $request->input('tipo_categoria_id'),
-                            $request->input('especialidad_id')
+                            $request->input('especialidad_id'),
+                            $request->input('cargo_ruta_id')
                         ]);
         return $db;
     }

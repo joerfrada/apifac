@@ -52,9 +52,9 @@ class UsuarioController extends Controller
                 $tmp['usuario_id'] = $row->usuario_id;
                 $tmp['usuario'] = $row->usuario;
                 $tmp['nombre_completo'] = $row->nombre_completo;
-                $tmp['avatar'] = $row->avatar;
-                $tmp['correo_electronico'] = $row->correo_electronico;
-                $tmp['tipo_perfil'] = $row->tipo_perfil;
+                // $tmp['avatar'] = $row->avatar;
+                // $tmp['correo_electronico'] = $row->correo_electronico;
+                // $tmp['tipo_perfil'] = $row->tipo_perfil;
                 $tmp['menus'] = $m_menu->get_menu_id($m_usuariomenu->getUsuarioMenu($row->usuario_id));
 
                 array_push($data, $tmp);
