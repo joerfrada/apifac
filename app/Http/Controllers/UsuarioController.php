@@ -61,6 +61,7 @@ class UsuarioController extends Controller
             }
 
             $user = Usuario::first();
+            JWTAuth::factory()->setTTL(30);
             $token = JWTAuth::fromUser($user);
 
             $response = json_encode(array('result' => $data), JSON_NUMERIC_CHECK);
