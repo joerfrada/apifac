@@ -55,6 +55,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/cargo/crearCargosConfiguracion', [CargoController::class, 'crearCargosConfiguracion']);
     Route::post('/cargo/actualizarCargosConfiguracion', [CargoController::class, 'actualizarCargosConfiguracion']);
 
+    // Cargos Experiencias
+    Route::post('/cargo/getCargosExperienciasById', [CargoController::class, 'getCargosExperienciasById']);
+    Route::post('/cargo/crearCargosExperiencias', [CargoController::class, 'crearCargosExperiencias']);
+    Route::post('/cargo/actualizarCargosExperiencias', [CargoController::class, 'actualizarCargosExperiencias']);
+
     // Areas
     Route::get('/area/getAreasFull',[AreaController::class, 'getAreasFull']);
     Route::post('/area/getAreas',[AreaController::class, 'getAreas']);
