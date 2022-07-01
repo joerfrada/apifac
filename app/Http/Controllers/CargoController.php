@@ -14,6 +14,7 @@ use App\Models\Cuerpo;
 use App\Models\Educacion;
 use App\Models\Especialidad;
 use App\Models\CargoExperiencia;
+use App\Models\UbicacionCargo;
 
 class CargoController extends Controller
 {
@@ -32,6 +33,17 @@ class CargoController extends Controller
         $model = new Cargo();
 
         $datos = $model->get_cargos_full();
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function getCargosId(Request $request) {
+        $model = new Cargo();
+
+        $datos = $model->get_cargos_by_id($request);
 
         $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
         $response = json_decode($response);
@@ -255,6 +267,55 @@ class CargoController extends Controller
 
         try {
             $db = $model->crud_cargos_experiencias($request, 'U');
+
+            if ($db) {
+                $response = json_encode(array('mensaje' => 'Fue actualizado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);
+                $response = json_decode($response);
+
+                return response()->json($response, 200);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(array('tipo' => -1, 'mensaje' => $e));
+        }
+    }
+
+    public function getUbicacionCargosId(Request $request) {
+        $model = new UbicacionCargo();
+
+        $datos = $model->get_ubicacion_cargos_by_id($request);
+
+        $response = json_encode(array('result' => $datos, 'tipo' => 0), JSON_NUMERIC_CHECK);
+        $response = json_decode($response);
+
+        return response()->json($response, 200);
+    }
+
+    public function crearUbicacionCargos(Request $request) {
+        $model = new UbicacionCargo();
+
+        try {
+            $db = $model->crud_ubicacion_cargos($request, 'C');
+
+            if ($db) {
+                $id = $db[0]->id;
+
+                $response = json_encode(array('mensaje' => 'Fue creado exitosamente.', 'tipo' => 0, 'id' => $id), JSON_NUMERIC_CHECK);
+                $response = json_decode($response);
+
+                return response()->json($response, 200);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(array('tipo' => -1, 'mensaje' => $e));
+        }
+    }
+
+    public function actualizarUbicacionCargos(Request $request) {
+        $model = new UbicacionCargo();
+
+        try {
+            $db = $model->crud_ubicacion_cargos($request, 'U');
 
             if ($db) {
                 $response = json_encode(array('mensaje' => 'Fue actualizado exitosamente.', 'tipo' => 0), JSON_NUMERIC_CHECK);

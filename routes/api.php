@@ -40,6 +40,7 @@ Route::get('/listadinamica/getListasDinamicasFull',[ListaDinamicaController::cla
 Route::group(['middleware' => ['jwt.verify']], function() {
     // Cargos
     Route::post('/cargo/getCargos', [CargoController::class, 'getCargos']);
+    Route::post('/cargos/getCargosId', [CargoController::class, 'getCargosId']);
     Route::post('/cargo/crearCargos', [CargoController::class, 'crearCargos']);
     Route::post('/cargo/actualizarCargos', [CargoController::class, 'actualizarCargos']);
     Route::post('/cargo/getDetalleCargos', [CargoController::class, 'getDetalleCargos']);
@@ -59,6 +60,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/cargo/getCargosExperienciasById', [CargoController::class, 'getCargosExperienciasById']);
     Route::post('/cargo/crearCargosExperiencias', [CargoController::class, 'crearCargosExperiencias']);
     Route::post('/cargo/actualizarCargosExperiencias', [CargoController::class, 'actualizarCargosExperiencias']);
+
+    // Ubicacion de Cargos
+    Route::post('/cargo/getUbicacionCargosId', [CargoController::class, 'getUbicacionCargosId']);
+    Route::post('/cargo/crearUbicacionCargos', [CargoController::class, 'crearUbicacionCargos']);
+    Route::post('/cargo/actualizarUbicacionCargos', [CargoController::class, 'actualizarUbicacionCargos']);
 
     // Areas
     Route::get('/area/getAreasFull',[AreaController::class, 'getAreasFull']);
