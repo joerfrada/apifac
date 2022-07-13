@@ -222,6 +222,7 @@ class RutaCarreraController extends Controller
                 $tmp_cargos['grado_desc'] = $item->grado_desc;
                 $tmp_cargos['cargo'] = $cargos[$i];
                 $tmp_cargos['cargo_id'] = $cargo_ids[$i];
+                $tmp_cargos['descripcion'] = $item->descripcion;
                 $tmp_cargos['clase_cargo'] = $clase_cargos[$i];
                 $tmp_cargos['tipo_ruta'] = $cargo_rutas[$i];
                 $tmp_cargos['categoria'] = $item->categoria;

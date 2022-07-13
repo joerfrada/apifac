@@ -28,12 +28,16 @@ class UbicacionCargo extends Model
     }
 
     public function crud_ubicacion_cargos(Request $request, $evento) {
-        $db = DB::select('exec pr_crud_app_ubicacion_cargos ?,?,?,?,?,?',
+        $db = DB::select('exec pr_crud_app_ubicacion_cargos ?,?,?,?,?,?,?,?,?,?',
                         [
                             $evento,
                             $request->input('ubicacion_cargo_id'),
                             $request->input('cargo_configuracion_id'),
-                            $request->input('nivel_id'),
+                            $request->input('nivel_id1'),
+                            $request->input('nivel_id2'),
+                            $request->input('nivel_id3'),
+                            $request->input('nivel_id4'),
+                            $request->input('nivel_id5'),
                             $request->input('usuario_creador'),
                             $request->input('usuario_modificador')
                         ]);
