@@ -56,10 +56,7 @@ class Cargo extends Model
     }
 
     public function get_cargos_by_id(Request $request) {
-        $db = DB::select('exec pr_get_cargos_by_id ?'
-                        [
-                            $request->input('cargo_id')
-                        ]);
+        $db = DB::select('exec pr_get_cargos_by_id ?', array($request->input('cargo_id')));
         return $db;
     }
 }
